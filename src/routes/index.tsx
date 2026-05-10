@@ -89,7 +89,7 @@ function Index() {
       <section className="relative py-20 border-y border-border/50 overflow-hidden">
         <div className="flex gap-16 animate-[shimmer_30s_linear_infinite] whitespace-nowrap text-6xl md:text-8xl font-bold text-chrome opacity-30">
           {Array.from({ length: 4 }).map((_, i) => (
-            <span key={i} className="inline-flex items-center gap-16">
+            <span key={i} className="inline-flex items-center gap-16 font-semibold">
               VFX <span className="text-primary-glow">◆</span>
               EDITING <span className="text-primary-glow">◆</span>
               3D MOTION <span className="text-primary-glow">◆</span>

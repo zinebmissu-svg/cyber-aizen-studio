@@ -1,99 +1,41 @@
+## What I'll build
 
-# Aizen — Cinematic Portfolio (V1: Visual Shell + Light 3D)
+### 1. Enable Lovable Cloud (backend)
+Required for: persistent content edits, sending real emails, storing reviews/projects, and securing the dashboard with login.
 
-A matte-black, chrome + electric-violet portfolio that feels like a film. Full layout, custom cursor, smooth scrolling, GSAP scroll animations, and lightweight Three.js scenes tuned for performance.
+### 2. Contact section updates
+- Replace generic socials with prominent **Instagram @aizen.visuals** card linking to `https://instagram.com/aizen.visuals` (opens in new tab).
+- Wire the contact form to **send a real email** in-place via a server function (no `mailto:`, no leaving the site). Shows inline success/error states. Email is delivered to your configured inbox using Lovable's built-in app emails (Resend-style, set up via Lovable Cloud).
 
-## Visual direction
+### 3. About section
+- Add your uploaded portrait as the main image with cinematic 3D effects:
+  - Mouse-driven 3D tilt (perspective rotateX/rotateY).
+  - Parallax violet glow + chromatic aberration-like layered shadow.
+  - Soft floating animation, scanline + grain overlay preserved.
+- Move **About above Work** in the page order (and update nav order + section labels `01 — About`, `02 — Portfolio`).
 
-- **Background**: matte black `#05060a` with deep space blue `#0b1020` gradients
-- **Accents**: electric violet `#a78bfa` → `#7c3aed`, soft chrome whites
-- **Texture**: subtle film grain overlay, volumetric fog, ambient glow, glassmorphism panels
-- **Typography**: oversized display sans for cinematic headers, mono for labels
+### 4. New "Reviews" section (horizontal scroll)
+- Placed after Services / before Contact.
+- Horizontally scrolling row of review cards (avatar, name, role, quote, star rating).
+- Smooth horizontal auto-scroll on hover-pause + drag/wheel scroll.
+- Editable from dashboard.
 
-## Sections & routes
+### 5. Admin Dashboard (`/admin`)
+Protected by login (your account only — first signup becomes admin). Lets you edit:
+- **Site content**: hero text, about text, stats, Instagram handle, contact email.
+- **Projects**: add/edit/delete portfolio items (title, category, year, type, gradient/cover).
+- **Reviews**: add/edit/delete reviewer name, role, quote, rating, avatar.
+- All changes are saved to the database and reflected live on the public site.
 
-Each gets its own route + unique SEO metadata:
+## Section order (after changes)
+Home → About → Work → Services → Reviews → Contact
 
-- `/` — Loading screen → Hero
-- `/work` — Portfolio gallery
-- `/about` — Editorial bio
-- `/services` — Floating service cards
-- `/contact` — Holographic contact form
+## Tech notes
+- Database tables: `site_settings`, `projects`, `reviews`, `user_roles` (admin role gated via `has_role` security-definer function).
+- Public read via RLS; writes restricted to admin role.
+- Email sending uses Lovable's built-in transactional email infrastructure (sends to your configured destination address).
+- Portrait image copied into `src/assets/aizen-portrait.png` and used in About.
 
-Sticky glass navigation with magnetic links across all routes.
+## A couple quick choices before I build
 
-## Section breakdown
-
-**Loading screen** (first visit)
-- Animated "AIZEN" logo reveal with chrome shimmer
-- Smooth 0→100 percentage counter
-- Floating particles, ambient violet glow
-- Dramatic fade + scale transition into hero
-
-**Hero**
-- Fullscreen Three.js scene: floating chrome geometric shape (icosahedron / torus knot) with metallic material + violet rim light, reacting to cursor
-- Particle field drifting in depth
-- Massive headline: *"Turning Ideas Into Moving Worlds."* with per-character reveal
-- Subhead: Moroccan VFX artist · Video editor · 3D motion designer
-- Magnetic "Enter Portfolio" CTA
-- Visualizer-style animated bars (no audio) pulsing along the bottom
-
-**Portfolio / Work**
-- Filter chips (All · VFX · Editing · 3D · Direction)
-- Grid of cinematic project cards with glass overlays
-- Hover: depth tilt, distortion, violet glow, autoplay video preview (placeholder loops)
-- Smooth stagger reveal on scroll
-
-**About**
-- Split editorial layout: floating portrait with violet rim lighting + animated bio
-- Scroll-triggered timeline of milestones
-- Subtle 3D motion background (slow drifting plane / fog)
-
-**Services**
-- 5 floating glass cards: VFX · Video Editing · 3D Motion · Creative Direction · Visual Branding
-- 3D tilt on hover, holographic gradient sweep, glow emit
-- Cursor-reactive parallax
-
-**Contact**
-- Holographic glass form (name, email, project, message) with glowing focus borders
-- Animated social icons (Instagram, Behance, Vimeo, YouTube)
-- "Based in Morocco" with ambient particle map accent
-- Floating ambient particles
-
-## Interaction systems (global)
-
-**Custom cursor**
-- Dot + trailing ring with smooth easing
-- Magnetic pull on buttons/links
-- Expand + violet glow on clickable elements
-- Particle burst on click
-- Hidden on touch devices (native cursor fallback)
-
-**Smooth scrolling** — Lenis-powered inertia across all routes
-
-**Scroll animations** — GSAP ScrollTrigger for:
-- Section reveals (fade + lift)
-- Parallax layers at varied speeds
-- Text character/word reveals
-- Pinned storytelling moments in hero & about
-
-**Film grain + vignette** — full-page overlay, very subtle
-
-## Tech approach
-
-- **Stack**: TanStack Start (already configured) + React 19 + Tailwind v4
-- **3D**: `three` + `@react-three/fiber` + `@react-three/drei` — lightweight scenes, single canvas per section, capped DPR, suspended on mobile
-- **Animation**: `gsap` + ScrollTrigger, `framer-motion` for UI micro-interactions
-- **Smooth scroll**: `lenis`
-- **SSR safety**: all WebGL/cursor/Lenis code gated to client (dynamic mounts, `typeof window` guards) so SSR doesn't crash
-- **Performance**: lazy-load 3D scenes per route, reduce particle counts on smaller viewports, `prefers-reduced-motion` respected
-- **Design tokens**: extend `src/styles.css` with new violet/chrome palette, grain texture, glass utilities
-
-## Out of scope for V1 (can layer in later)
-
-- Real audio playback
-- Heavy WebGL shaders / post-processing (bloom, DOF) — start with material-level glow
-- Real project videos (placeholder loops / posters until you provide assets)
-- CMS / backend
-
-After approval I'll scaffold the routes, install dependencies, build the cursor + Lenis + grain shell, then ship each section.
+I'll ask 2 questions to finalize, then implement everything.

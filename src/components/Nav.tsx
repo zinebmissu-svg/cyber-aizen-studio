@@ -1,10 +1,12 @@
+import { Link } from "@tanstack/react-router";
 import { scrollToId } from "./SmoothScroll";
 
 const links = [
   { id: "home", label: "Home" },
-  { id: "work", label: "Work" },
   { id: "about", label: "About" },
+  { id: "work", label: "Work" },
   { id: "services", label: "Services" },
+  { id: "reviews", label: "Reviews" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -35,20 +37,28 @@ export function Nav() {
               key={l.id}
               href={`#${l.id}`}
               onClick={(e) => handleClick(e, l.id)}
-              className="px-4 py-2 text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors rounded-full"
+              className="px-3 py-2 text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors rounded-full"
             >
               {l.label}
             </a>
           ))}
         </nav>
-        <a
-          href="#contact"
-          onClick={(e) => handleClick(e, "contact")}
-          className="text-xs font-mono uppercase tracking-[0.2em] px-4 py-2 rounded-full bg-foreground/95 text-background hover:bg-primary hover:text-primary-foreground transition-colors"
-          data-cursor-label="Get in touch"
-        >
-          Hire ↗
-        </a>
+        <div className="flex items-center gap-2">
+          <Link
+            to="/admin"
+            className="hidden md:inline-flex text-[10px] font-mono uppercase tracking-[0.25em] px-3 py-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary-glow/50 transition-colors"
+          >
+            Admin
+          </Link>
+          <a
+            href="#contact"
+            onClick={(e) => handleClick(e, "contact")}
+            className="text-xs font-mono uppercase tracking-[0.2em] px-4 py-2 rounded-full bg-foreground/95 text-background hover:bg-primary hover:text-primary-foreground transition-colors"
+            data-cursor-label="Get in touch"
+          >
+            Hire ↗
+          </a>
+        </div>
       </div>
     </header>
   );

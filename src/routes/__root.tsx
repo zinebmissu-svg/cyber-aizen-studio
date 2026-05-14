@@ -6,6 +6,7 @@ import { SmoothScroll } from "../components/SmoothScroll";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
+import { ThemeApplier } from "../components/ThemeApplier";
 
 function NotFoundComponent() {
   return (
@@ -68,6 +69,7 @@ function RootComponent() {
   return (
     <>
       <ClientOnly>
+        <ThemeApplier />
         <LoadingScreen />
         <CustomCursor />
         <SmoothScroll />

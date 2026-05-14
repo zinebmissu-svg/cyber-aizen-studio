@@ -1,7 +1,8 @@
 import { useRef, type MouseEvent } from "react";
-import portrait from "@/assets/aizen-portrait.png";
+import defaultPortrait from "@/assets/aizen-portrait.png";
 
-export function Portrait3D() {
+export function Portrait3D({ src }: { src?: string | null }) {
+  const portrait = src && src.length > 0 ? src : defaultPortrait;
   const wrapRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);

@@ -74,27 +74,28 @@ export function CustomCursor() {
       <style>{`
         .cursor-dot {
           position: fixed; left: 0; top: 0; width: 6px; height: 6px;
-          background: oklch(0.92 0.02 295); border-radius: 9999px;
+          background: var(--cursor-color, oklch(0.92 0.02 295)); border-radius: 9999px;
           pointer-events: none; z-index: 9999;
-          box-shadow: 0 0 12px oklch(0.62 0.22 295 / 80%);
+          box-shadow: 0 0 12px var(--cursor-color, oklch(0.62 0.22 295));
           mix-blend-mode: difference;
         }
         .cursor-ring {
           position: fixed; left: 0; top: 0; width: 38px; height: 38px;
-          border: 1px solid oklch(0.78 0.18 295 / 80%);
+          border: 1px solid var(--cursor-color, oklch(0.78 0.18 295));
           border-radius: 9999px; pointer-events: none; z-index: 9998;
           transition: width .25s ease, height .25s ease, background .25s ease, border-color .25s ease;
-          box-shadow: 0 0 30px oklch(0.62 0.22 295 / 35%), inset 0 0 12px oklch(0.62 0.22 295 / 25%);
+          box-shadow: 0 0 30px color-mix(in oklab, var(--cursor-color, oklch(0.62 0.22 295)) 40%, transparent),
+                      inset 0 0 12px color-mix(in oklab, var(--cursor-color, oklch(0.62 0.22 295)) 25%, transparent);
         }
         .cursor-ring.cursor-hover {
           width: 70px; height: 70px;
-          background: oklch(0.62 0.22 295 / 12%);
-          border-color: oklch(0.85 0.15 295 / 90%);
+          background: color-mix(in oklab, var(--cursor-color, oklch(0.62 0.22 295)) 14%, transparent);
+          border-color: var(--cursor-color, oklch(0.85 0.15 295));
         }
         .cursor-ring.cursor-burst { animation: cursor-burst .55s ease-out; }
         @keyframes cursor-burst {
-          0% { box-shadow: 0 0 0 0 oklch(0.62 0.22 295 / 60%); }
-          100% { box-shadow: 0 0 0 60px oklch(0.62 0.22 295 / 0%); }
+          0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--cursor-color, oklch(0.62 0.22 295)) 60%, transparent); }
+          100% { box-shadow: 0 0 0 60px transparent; }
         }
         .cursor-label {
           position: absolute; top: 50%; left: 50%;

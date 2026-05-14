@@ -44,15 +44,9 @@ function Visualizer() {
 
 const FILTERS = ["All", "VFX", "Editing", "3D Motion", "Direction"] as const;
 
-const SERVICES = [
-  { n: "01", t: "VFX", d: "Compositing, simulations, and cinematic post-production for music videos, films, and brand work.", icon: "✦" },
-  { n: "02", t: "Video Editing", d: "Rhythm-first editorial — cutting story, music, and emotion into a single frame language.", icon: "▶" },
-  { n: "03", t: "3D Motion Graphics", d: "Procedural worlds, chrome typography, and physics-based motion for screens of every scale.", icon: "◆" },
-  { n: "04", t: "Creative Direction", d: "End-to-end concept, art direction, and visual treatment from mood to delivery.", icon: "◉" },
-  { n: "05", t: "Visual Branding", d: "Identity systems with motion baked in — logos, type, and brand films that move.", icon: "❖" },
-] as const;
+type ServiceItem = { n: string; t: string; d: string; icon: string };
 
-function TiltCard({ s }: { s: (typeof SERVICES)[number] }) {
+function TiltCard({ s }: { s: ServiceItem }) {
   const ref = useRef<HTMLDivElement>(null);
   const onMove = (e: MouseEvent) => {
     const el = ref.current;
@@ -190,10 +184,8 @@ function Index() {
         <div className="flex gap-16 w-max animate-marquee-x whitespace-nowrap text-6xl md:text-8xl font-bold text-chrome opacity-30">
           {Array.from({ length: 4 }).map((_, i) => (
             <span key={i} className="inline-flex items-center gap-16 font-semibold">
-              VFX <span className="text-primary-glow">◆</span>
-              EDITING <span className="text-primary-glow">◆</span>
-              3D MOTION <span className="text-primary-glow">◆</span>
-              DIRECTION <span className="text-primary-glow">◆</span>
+              {(settings?.marquee_text ?? "VFX ◆ EDITING ◆ 3D MOTION ◆ DIRECTION")}
+              <span className="text-primary-glow">◆</span>
             </span>
           ))}
         </div>
@@ -208,7 +200,7 @@ function Index() {
           </h2>
 
           <div className="mt-20 grid gap-12 md:grid-cols-[1fr_1.4fr] items-start">
-            <Portrait3D />
+            <Portrait3D src={settings?.portrait_url} />
 
             <div className="space-y-8">
               <p className="text-xl md:text-2xl text-foreground/90 leading-relaxed whitespace-pre-line">
@@ -241,11 +233,10 @@ function Index() {
           <div className="mb-16">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 02 — Portfolio</div>
             <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-              Selected <span className="italic font-light text-violet-glow">work</span>
+              {settings?.work_headline ?? "Selected work"}
             </h2>
             <p className="mt-6 max-w-2xl text-muted-foreground">
-              A living archive of cinematic frames — music, fashion, film, and brand work
-              shot, edited, and crafted with obsessive detail.
+              {settings?.work_subtitle}
             </p>
           </div>
 
@@ -314,11 +305,11 @@ function Index() {
           <div className="mb-16">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 03 — Services</div>
             <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-              What I <span className="italic font-light text-violet-glow">make</span>
+              {settings?.services_headline ?? "What I make"}
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((s) => <TiltCard key={s.n} s={s} />)}
+            {(settings?.services_json ?? []).map((s: ServiceItem) => <TiltCard key={s.n} s={s} />)}
           </div>
         </div>
       </section>
@@ -328,7 +319,7 @@ function Index() {
         <div className="mx-auto max-w-7xl px-6 md:px-10 mb-16">
           <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Reviews</div>
           <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-            Words from <span className="italic font-light text-violet-glow">collaborators</span>
+            {settings?.reviews_headline ?? "Words from collaborators"}
           </h2>
         </div>
         <ReviewsMarquee reviews={reviews} />
@@ -339,7 +330,7 @@ function Index() {
         <div className="mx-auto max-w-6xl">
           <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 05 — Contact</div>
           <h2 className="text-5xl md:text-8xl font-bold text-chrome leading-[0.92]">
-            Let's make <span className="italic font-light text-violet-glow">something</span>.
+            {settings?.contact_headline ?? "Let's make something."}
           </h2>
 
           <div className="mt-16 grid gap-12 md:grid-cols-[1.2fr_1fr]">
@@ -422,8 +413,8 @@ function Index() {
 
               <div className="p-6 rounded-3xl glass">
                 <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">Based in</div>
-                <div className="text-xl font-bold text-chrome">Casablanca, Morocco</div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mt-1">Working worldwide</div>
+                <div className="text-xl font-bold text-chrome">{settings?.location_text ?? "Casablanca, Morocco"}</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mt-1">{settings?.location_sub ?? "Working worldwide"}</div>
               </div>
             </div>
           </div>

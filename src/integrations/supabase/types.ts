@@ -121,61 +121,115 @@ export type Database = {
           about_headline: string
           about_p1: string
           about_p2: string
+          brand_name: string
           contact_email: string
+          contact_headline: string
+          cursor_color: string
+          footer_text: string
           hero_eyebrow: string
+          hero_image_url: string | null
           hero_line1: string
           hero_line2: string
           hero_line3: string
           hero_subtitle: string
           id: number
           instagram_handle: string
+          location_sub: string
+          location_text: string
+          marquee_text: string
+          portrait_url: string | null
+          reviews_headline: string
+          services_headline: string
+          services_json: Json
           stat1_l: string
           stat1_n: string
           stat2_l: string
           stat2_n: string
           stat3_l: string
           stat3_n: string
+          theme_bg: string
+          theme_foreground: string
+          theme_primary: string
+          theme_primary_glow: string
           updated_at: string
+          work_headline: string
+          work_subtitle: string
         }
         Insert: {
           about_headline?: string
           about_p1?: string
           about_p2?: string
+          brand_name?: string
           contact_email?: string
+          contact_headline?: string
+          cursor_color?: string
+          footer_text?: string
           hero_eyebrow?: string
+          hero_image_url?: string | null
           hero_line1?: string
           hero_line2?: string
           hero_line3?: string
           hero_subtitle?: string
           id?: number
           instagram_handle?: string
+          location_sub?: string
+          location_text?: string
+          marquee_text?: string
+          portrait_url?: string | null
+          reviews_headline?: string
+          services_headline?: string
+          services_json?: Json
           stat1_l?: string
           stat1_n?: string
           stat2_l?: string
           stat2_n?: string
           stat3_l?: string
           stat3_n?: string
+          theme_bg?: string
+          theme_foreground?: string
+          theme_primary?: string
+          theme_primary_glow?: string
           updated_at?: string
+          work_headline?: string
+          work_subtitle?: string
         }
         Update: {
           about_headline?: string
           about_p1?: string
           about_p2?: string
+          brand_name?: string
           contact_email?: string
+          contact_headline?: string
+          cursor_color?: string
+          footer_text?: string
           hero_eyebrow?: string
+          hero_image_url?: string | null
           hero_line1?: string
           hero_line2?: string
           hero_line3?: string
           hero_subtitle?: string
           id?: number
           instagram_handle?: string
+          location_sub?: string
+          location_text?: string
+          marquee_text?: string
+          portrait_url?: string | null
+          reviews_headline?: string
+          services_headline?: string
+          services_json?: Json
           stat1_l?: string
           stat1_n?: string
           stat2_l?: string
           stat2_n?: string
           stat3_l?: string
           stat3_n?: string
+          theme_bg?: string
+          theme_foreground?: string
+          theme_primary?: string
+          theme_primary_glow?: string
           updated_at?: string
+          work_headline?: string
+          work_subtitle?: string
         }
         Relationships: []
       }

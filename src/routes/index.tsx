@@ -44,15 +44,9 @@ function Visualizer() {
 
 const FILTERS = ["All", "VFX", "Editing", "3D Motion", "Direction"] as const;
 
-const SERVICES = [
-  { n: "01", t: "VFX", d: "Compositing, simulations, and cinematic post-production for music videos, films, and brand work.", icon: "✦" },
-  { n: "02", t: "Video Editing", d: "Rhythm-first editorial — cutting story, music, and emotion into a single frame language.", icon: "▶" },
-  { n: "03", t: "3D Motion Graphics", d: "Procedural worlds, chrome typography, and physics-based motion for screens of every scale.", icon: "◆" },
-  { n: "04", t: "Creative Direction", d: "End-to-end concept, art direction, and visual treatment from mood to delivery.", icon: "◉" },
-  { n: "05", t: "Visual Branding", d: "Identity systems with motion baked in — logos, type, and brand films that move.", icon: "❖" },
-] as const;
+type ServiceItem = { n: string; t: string; d: string; icon: string };
 
-function TiltCard({ s }: { s: (typeof SERVICES)[number] }) {
+function TiltCard({ s }: { s: ServiceItem }) {
   const ref = useRef<HTMLDivElement>(null);
   const onMove = (e: MouseEvent) => {
     const el = ref.current;

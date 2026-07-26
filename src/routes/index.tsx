@@ -391,14 +391,14 @@ function Index() {
               >
                 <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-primary/30 blur-3xl opacity-60 group-hover:opacity-100 transition-opacity" />
                 <div className="relative flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-amber-400 flex items-center justify-center text-2xl text-white font-bold">
-                    IG
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-amber-400 flex items-center justify-center text-primary-foreground">
+                    <Instagram className="w-7 h-7" strokeWidth={1.75} />
                   </div>
                   <div className="flex-1">
                     <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Instagram</div>
                     <div className="text-xl font-bold text-chrome">@{ig.replace(/^@/, "")}</div>
                   </div>
-                  <span className="text-2xl text-primary-glow group-hover:translate-x-1 transition-transform">↗</span>
+                  <ArrowUpRight className="w-6 h-6 text-primary-glow group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>
 
@@ -407,15 +407,30 @@ function Index() {
                 data-cursor-label="Email"
                 className="group block p-6 rounded-3xl glass relative overflow-hidden"
               >
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Email</div>
-                <div className="text-xl font-bold text-chrome mt-1">{email}</div>
+                <div className="relative flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl border border-border flex items-center justify-center text-primary-glow">
+                    <Mail className="w-6 h-6" strokeWidth={1.75} />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Email</div>
+                    <div className="text-xl font-bold text-chrome mt-1">{email}</div>
+                  </div>
+                </div>
               </a>
 
               <div className="p-6 rounded-3xl glass">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">Based in</div>
-                <div className="text-xl font-bold text-chrome">{settings?.location_text ?? "Casablanca, Morocco"}</div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mt-1">{settings?.location_sub ?? "Working worldwide"}</div>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl border border-border flex items-center justify-center text-primary-glow">
+                    <MapPin className="w-6 h-6" strokeWidth={1.75} />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-1">Based in</div>
+                    <div className="text-xl font-bold text-chrome">{settings?.location_text ?? "Casablanca, Morocco"}</div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mt-1">{settings?.location_sub ?? "Working worldwide"}</div>
+                  </div>
+                </div>
               </div>
+
             </div>
           </div>
         </div>

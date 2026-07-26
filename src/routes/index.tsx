@@ -9,6 +9,8 @@ import { scrollToId } from "../components/SmoothScroll";
 import { useSiteData, type Project } from "../hooks/use-site-data";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { Instagram, Mail, MapPin, ArrowUpRight } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({

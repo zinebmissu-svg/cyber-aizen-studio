@@ -33,7 +33,7 @@
   --color-ring: var(--ring);
   --color-chrome: var(--chrome);
   --color-deep: var(--deep);
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 

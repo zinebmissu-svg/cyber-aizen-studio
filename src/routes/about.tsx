@@ -85,7 +85,7 @@ function AboutPage() {
               <div key={t.y} className="relative">
                 <div className="absolute -left-[37px] top-2 w-3 h-3 rounded-full bg-primary-glow shadow-[0_0_16px_oklch(0.62_0.22_295)]" />
                 <div className="font-mono text-xs tracking-[0.3em] text-primary-glow">{t.y}</div>
-                <h3 className="mt-1 text-2xl font-bold text-chrome">{t.t}</h3>
+                <h2 className="mt-1 text-2xl font-bold text-chrome">{t.t}</h2>
                 <p className="mt-2 max-w-2xl text-muted-foreground">{t.d}</p>
               </div>
             ))}

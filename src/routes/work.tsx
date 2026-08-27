@@ -82,7 +82,7 @@ function WorkPage() {
                 </div>
                 <div>
                   <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">{p.c}</div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-chrome leading-tight">{p.t}</h3>
+                  <h2 className="text-2xl md:text-3xl font-bold text-chrome leading-tight">{p.t}</h2>
                   <div className="mt-4 h-px w-0 bg-primary-glow transition-all duration-500 group-hover:w-full" />
                 </div>
               </div>

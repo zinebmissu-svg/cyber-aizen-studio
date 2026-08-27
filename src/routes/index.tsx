@@ -159,12 +159,8 @@ function Index() {
           </p>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <button onClick={() => scrollToId("work")} className="inline-block">
-              <MagneticButton label="View work">Enter Portfolio</MagneticButton>
-            </button>
-            <button onClick={() => scrollToId("contact")} className="inline-block">
-              <MagneticButton variant="ghost" label="Reach out">Start a Project</MagneticButton>
-            </button>
+            <MagneticButton label="View work" onClick={() => scrollToId("work")}>Enter Portfolio</MagneticButton>
+            <MagneticButton variant="ghost" label="Reach out" onClick={() => scrollToId("contact")}>Start a Project</MagneticButton>
           </div>
 
           <div className="mt-16 max-w-md mx-auto">

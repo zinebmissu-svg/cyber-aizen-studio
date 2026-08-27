@@ -163,27 +163,28 @@ function ContactPage() {
 
           {/* Form */}
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-            }}
+            onSubmit={handleSubmit}
             className="relative glass-strong rounded-3xl p-8 md:p-10 space-y-6"
           >
             <div className="absolute -inset-px rounded-3xl pointer-events-none" style={{ background: "linear-gradient(135deg, oklch(0.62 0.22 295 / 30%), transparent 50%)", maskImage: "linear-gradient(black, black) content-box, linear-gradient(black, black)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: "1px" }} />
 
             <div className="grid gap-6 md:grid-cols-2">
-              <Field label="Name" />
-              <Field label="Email" type="email" />
+              <Field label="Name" value={form.name} onChange={(v) => setForm((f) => ({ ...f, name: v }))} />
+              <Field label="Email" type="email" value={form.email} onChange={(v) => setForm((f) => ({ ...f, email: v }))} />
             </div>
-            <Field label="Project type" />
-            <Field label="Tell me about it" as="textarea" />
+            <Field label="Project type" value={form.projectType} onChange={(v) => setForm((f) => ({ ...f, projectType: v }))} />
+            <Field label="Tell me about it" as="textarea" value={form.message} onChange={(v) => setForm((f) => ({ ...f, message: v }))} />
+
+            {error && (
+              <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-destructive">{error}</div>
+            )}
 
             <div className="flex items-center justify-between flex-wrap gap-4 pt-2">
               <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
                 Replies within 48h
               </div>
-              <MagneticButton onClick={() => {}} label="Send">
-                {sent ? "Transmitted ✓" : "Transmit"}
+              <MagneticButton label="Send">
+                {status === "sending" ? "Transmitting…" : sent ? "Transmitted ✓" : "Transmit"}
               </MagneticButton>
             </div>
           </form>

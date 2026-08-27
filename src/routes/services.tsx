@@ -52,7 +52,7 @@ function TiltCard({ s }: { s: (typeof SERVICES)[number] }) {
         <span className="font-mono text-xs tracking-[0.3em] text-primary-glow">/ {s.n}</span>
         <span className="text-3xl text-violet-glow group-hover:rotate-180 transition-transform duration-700">{s.icon}</span>
       </div>
-      <h3 className="relative text-3xl md:text-4xl font-bold text-chrome mb-4">{s.t}</h3>
+      <h2 className="relative text-3xl md:text-4xl font-bold text-chrome mb-4">{s.t}</h2>
       <p className="relative text-muted-foreground leading-relaxed">{s.d}</p>
 
       <div className="relative mt-8 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/70">

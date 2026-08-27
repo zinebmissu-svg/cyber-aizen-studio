@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+import { z } from "zod";
 import { MagneticButton } from "../components/MagneticButton";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -9,7 +11,11 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Start a cinematic project with Aizen. Based in Morocco, working worldwide." },
       { property: "og:title", content: "Contact Aizen" },
       { property: "og:description", content: "Get in touch to start a cinematic project." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://cyber-aizen-studio.lovable.app/contact" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://cyber-aizen-studio.lovable.app/contact" }],
   }),
   component: ContactPage,
 });
@@ -21,7 +27,25 @@ const SOCIALS = [
   { n: "YouTube", h: "https://youtube.com" },
 ];
 
-function Field({ label, type = "text", as }: { label: string; type?: string; as?: "textarea" }) {
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name required").max(120),
+  email: z.string().trim().email("Invalid email").max(255),
+  message: z.string().trim().min(1, "Message required").max(5000),
+});
+
+function Field({
+  label,
+  type = "text",
+  as,
+  value,
+  onChange,
+}: {
+  label: string;
+  type?: string;
+  as?: "textarea";
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <label className="block group">
       <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">
@@ -30,12 +54,16 @@ function Field({ label, type = "text", as }: { label: string; type?: string; as?
       {as === "textarea" ? (
         <textarea
           rows={5}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
           data-cursor-label="Type"
           className="w-full bg-transparent border border-border rounded-xl px-4 py-3 text-foreground outline-none transition-all focus:border-primary-glow focus:shadow-[0_0_30px_-5px_oklch(0.62_0.22_295/60%)]"
         />
       ) : (
         <input
           type={type}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
           data-cursor-label="Type"
           className="w-full bg-transparent border border-border rounded-xl px-4 py-3 text-foreground outline-none transition-all focus:border-primary-glow focus:shadow-[0_0_30px_-5px_oklch(0.62_0.22_295/60%)]"
         />
@@ -45,7 +73,33 @@ function Field({ label, type = "text", as }: { label: string; type?: string; as?
 }
 
 function ContactPage() {
-  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", projectType: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+  const sent = status === "sent";
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    const message = form.projectType
+      ? `Project type: ${form.projectType}\n\n${form.message}`
+      : form.message;
+    const parsed = contactSchema.safeParse({ name: form.name, email: form.email, message });
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "Invalid input");
+      setStatus("error");
+      return;
+    }
+    setStatus("sending");
+    const { error: insertError } = await supabase.from("contact_submissions").insert(parsed.data);
+    if (insertError) {
+      setStatus("error");
+      setError(insertError.message);
+    } else {
+      setStatus("sent");
+      setForm({ name: "", email: "", projectType: "", message: "" });
+    }
+  };
   return (
     <section className="relative pt-40 pb-32 px-6 md:px-10 overflow-hidden">
       {/* ambient particles */}

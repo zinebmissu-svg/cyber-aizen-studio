@@ -7,6 +7,7 @@ import { LoadingScreen } from "../components/LoadingScreen";
 import { Nav } from "../components/Nav";
 import { Footer } from "../components/Footer";
 import { ThemeApplier } from "../components/ThemeApplier";
+import { ScrollReveal } from "../components/ScrollReveal";
 
 function NotFoundComponent() {
   return (

@@ -10,7 +10,7 @@ import { useSiteData, type Project } from "../hooks/use-site-data";
 import Timeline from "../components/Timeline";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
-import { Instagram, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { Instagram, Mail, MapPin, ArrowUpRight , MessageCircle} from "lucide-react";
 
 
 export const Route = createFileRoute("/")({
@@ -133,7 +133,8 @@ function Index() {
 
   const ig = settings?.instagram_handle ?? "aizen.visuals";
   const igUrl = `https://instagram.com/${ig.replace(/^@/, "")}`;
-  const email = settings?.contact_email ?? "contact@aizen.studio";
+  const email = settings?.contact_email ?? "contact@aizenvfx.com";
+  const whatsapp = "+212 627 477 131";
 
   return (
     <>
@@ -334,110 +335,121 @@ function Index() {
       {/* CONTACT */}
       <section id="contact" className="relative py-32 px-6 md:px-10 scroll-mt-24">
         <div className="mx-auto max-w-6xl">
-          <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 05 — Contact</div>
+          <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Contact</div>
           <h2 className="text-5xl md:text-8xl font-bold text-chrome leading-[0.92]">
-            {settings?.contact_headline ?? "Let's make something."}
+            {settings?.contact_headline ?? "Let's make something moving."}
           </h2>
+          <p className="mt-6 text-muted-foreground">Got a project? Let's talk.</p>
 
-          <div className="mt-16 grid gap-12 md:grid-cols-[1.2fr_1fr]">
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="mt-16 grid gap-14 md:grid-cols-[1fr_1.1fr] items-start">
+            {/* Contact list */}
+            <div className="space-y-9">
+              <a href={`mailto:${email}`} data-cursor-label="Email" className="group flex items-center gap-5">
+                <div className="w-11 h-11 shrink-0 rounded-full border border-border flex items-center justify-center text-primary-glow transition-all group-hover:border-primary-glow group-hover:shadow-[0_0_24px_-4px_oklch(0.62_0.22_295/70%)]">
+                  <Mail className="w-5 h-5" strokeWidth={1.75} />
+                </div>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Email</div>
+                  <div className="text-xl font-bold text-chrome">{email}</div>
+                </div>
+              </a>
+
+              <a href={igUrl} target="_blank" rel="noopener noreferrer" data-cursor-label="Open Instagram" className="group flex items-center gap-5">
+                <div className="w-11 h-11 shrink-0 rounded-full border border-border flex items-center justify-center text-primary-glow transition-all group-hover:border-primary-glow group-hover:shadow-[0_0_24px_-4px_oklch(0.62_0.22_295/70%)]">
+                  <Instagram className="w-5 h-5" strokeWidth={1.75} />
+                </div>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Instagram</div>
+                  <div className="text-xl font-bold text-chrome">@{ig.replace(/^@/, "")}</div>
+                </div>
+              </a>
+
+              <a href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" data-cursor-label="WhatsApp" className="group flex items-center gap-5">
+                <div className="w-11 h-11 shrink-0 rounded-full border border-border flex items-center justify-center text-primary-glow transition-all group-hover:border-primary-glow group-hover:shadow-[0_0_24px_-4px_oklch(0.62_0.22_295/70%)]">
+                  <MessageCircle className="w-5 h-5" strokeWidth={1.75} />
+                </div>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">WhatsApp</div>
+                  <div className="text-xl font-bold text-chrome">{whatsapp}</div>
+                </div>
+              </a>
+
+              <div className="flex items-center gap-5">
+                <div className="w-11 h-11 shrink-0 rounded-full border border-border flex items-center justify-center text-primary-glow">
+                  <MapPin className="w-5 h-5" strokeWidth={1.75} />
+                </div>
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Based in</div>
+                  <div className="text-xl font-bold text-chrome">{settings?.location_text ?? "Casablanca, Morocco"}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Form card */}
+            <form onSubmit={handleSubmit} className="glass-strong rounded-3xl p-8 md:p-10 space-y-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <label className="block group">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Name</div>
+                  <input
+                    type="text"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    data-cursor-label="Type"
+                    className="w-full bg-transparent border border-border rounded-xl px-4 py-3 text-foreground outline-none transition-all focus:border-primary-glow focus:shadow-[0_0_30px_-5px_oklch(0.62_0.22_295/60%)]"
+                  />
+                </label>
+                <label className="block group">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Email</div>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    data-cursor-label="Type"
+                    className="w-full bg-transparent border border-border rounded-xl px-4 py-3 text-foreground outline-none transition-all focus:border-primary-glow focus:shadow-[0_0_30px_-5px_oklch(0.62_0.22_295/60%)]"
+                  />
+                </label>
+              </div>
+
               <label className="block group">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Name</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Project type</div>
                 <input
                   type="text"
-                  value={form.name}
-                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  value={projectType}
+                  onChange={(e) => setProjectType(e.target.value)}
                   data-cursor-label="Type"
                   className="w-full bg-transparent border border-border rounded-xl px-4 py-3 text-foreground outline-none transition-all focus:border-primary-glow focus:shadow-[0_0_30px_-5px_oklch(0.62_0.22_295/60%)]"
                 />
               </label>
+
               <label className="block group">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Email</div>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  data-cursor-label="Type"
-                  className="w-full bg-transparent border border-border rounded-xl px-4 py-3 text-foreground outline-none transition-all focus:border-primary-glow focus:shadow-[0_0_30px_-5px_oklch(0.62_0.22_295/60%)]"
-                />
-              </label>
-              <label className="block group">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Message</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Tell me about it</div>
                 <textarea
-                  rows={5}
+                  rows={6}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   data-cursor-label="Type"
                   className="w-full bg-transparent border border-border rounded-xl px-4 py-3 text-foreground outline-none transition-all focus:border-primary-glow focus:shadow-[0_0_30px_-5px_oklch(0.62_0.22_295/60%)]"
                 />
               </label>
+
               {error && <div className="text-sm text-destructive font-mono">{error}</div>}
               {status === "sent" && (
                 <div className="text-sm text-primary-glow font-mono">✓ Message sent. I'll get back to you shortly.</div>
               )}
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                data-cursor-label="Send"
-                className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-foreground text-background font-mono text-xs uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-60"
-              >
-                {status === "sending" ? "Sending..." : "Send message"} <span>↗</span>
-              </button>
-            </form>
 
-            {/* Contacts */}
-            <div className="space-y-6">
-              <a
-                href={igUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor-label="Open Instagram"
-                className="group block p-6 rounded-3xl glass-strong relative overflow-hidden transition-transform hover:-translate-y-1"
-              >
-                <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-primary/30 blur-3xl opacity-60 group-hover:opacity-100 transition-opacity" />
-                <div className="relative flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-amber-400 flex items-center justify-center text-primary-foreground">
-                    <Instagram className="w-7 h-7" strokeWidth={1.75} />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Instagram</div>
-                    <div className="text-xl font-bold text-chrome">@{ig.replace(/^@/, "")}</div>
-                  </div>
-                  <ArrowUpRight className="w-6 h-6 text-primary-glow group-hover:translate-x-1 transition-transform" />
-                </div>
-              </a>
-
-              <a
-                href={`mailto:${email}`}
-                data-cursor-label="Email"
-                className="group block p-6 rounded-3xl glass relative overflow-hidden"
-              >
-                <div className="relative flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl border border-border flex items-center justify-center text-primary-glow">
-                    <Mail className="w-6 h-6" strokeWidth={1.75} />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Email</div>
-                    <div className="text-xl font-bold text-chrome mt-1">{email}</div>
-                  </div>
-                </div>
-              </a>
-
-              <div className="p-6 rounded-3xl glass">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl border border-border flex items-center justify-center text-primary-glow">
-                    <MapPin className="w-6 h-6" strokeWidth={1.75} />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-1">Based in</div>
-                    <div className="text-xl font-bold text-chrome">{settings?.location_text ?? "Casablanca, Morocco"}</div>
-                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mt-1">{settings?.location_sub ?? "Working worldwide"}</div>
-                  </div>
-                </div>
+              <div className="flex items-center justify-between gap-6 pt-2">
+                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Replies within 48h</div>
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  data-cursor-label="Send"
+                  className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-foreground text-background font-mono text-xs uppercase tracking-[0.25em] hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-60"
+                >
+                  {status === "sending" ? "Sending..." : "Transmit"}
+                  <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_2px_oklch(0.62_0.22_295/80%)]" />
+                </button>
               </div>
-
-            </div>
+            </form>
           </div>
         </div>
       </section>

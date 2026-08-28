@@ -7,6 +7,7 @@ import { Portrait3D } from "../components/Portrait3D";
 import { ReviewsMarquee } from "../components/ReviewsMarquee";
 import { scrollToId } from "../components/SmoothScroll";
 import { useSiteData, type Project } from "../hooks/use-site-data";
+import Timeline from "../components/Timeline";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import { Instagram, Mail, MapPin, ArrowUpRight } from "lucide-react";
@@ -224,6 +225,8 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <Timeline />
 
       {/* WORK */}
       <section id="work" className="relative py-32 px-6 md:px-10 scroll-mt-24">

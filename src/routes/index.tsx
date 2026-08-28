@@ -104,13 +104,17 @@ function Index() {
   const items: Project[] = projects.filter((p) => filter === "All" || p.kind === filter);
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [projectType, setProjectType] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
-    const parsed = contactSchema.safeParse(form);
+    const parsed = contactSchema.safeParse({
+      ...form,
+      message: projectType ? `[${projectType}] ${form.message}` : form.message,
+    });
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Invalid input");
       return;
@@ -123,6 +127,7 @@ function Index() {
     } else {
       setStatus("sent");
       setForm({ name: "", email: "", message: "" });
+      setProjectType("");
     }
   };
 

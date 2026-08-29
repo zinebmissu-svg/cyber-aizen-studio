@@ -74,6 +74,7 @@ function RootComponent() {
         <LoadingScreen />
         <CustomCursor />
         <SmoothScroll />
+        <ScrollReveal />
       </ClientOnly>
       <Nav />
       <main className="relative">

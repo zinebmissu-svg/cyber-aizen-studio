@@ -9,6 +9,15 @@ export function ScrollReveal() {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const revealVisible = () => {
+      document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+          el.classList.add("reveal-in");
+        }
+      });
+    };
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -37,13 +46,27 @@ export function ScrollReveal() {
       });
     };
 
-    collect();
-    const mo = new MutationObserver(() => collect());
+    let collectTimer = 0;
+    const scheduleCollect = () => {
+      window.clearTimeout(collectTimer);
+      collectTimer = window.setTimeout(() => {
+        collect();
+        revealVisible();
+      }, 100);
+    };
+
+    scheduleCollect();
+    const mo = new MutationObserver(scheduleCollect);
     mo.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("scroll", revealVisible, { passive: true });
+    window.addEventListener("resize", revealVisible);
 
     return () => {
+      window.clearTimeout(collectTimer);
       io.disconnect();
       mo.disconnect();
+      window.removeEventListener("scroll", revealVisible);
+      window.removeEventListener("resize", revealVisible);
     };
   }, []);
 

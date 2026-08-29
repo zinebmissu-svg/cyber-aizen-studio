@@ -38,44 +38,218 @@ export type Database = {
         }
         Relationships: []
       }
+      media: {
+        Row: {
+          alt: string
+          created_at: string
+          deleted_at: string | null
+          id: string
+          kind: string
+          mime_type: string | null
+          provider: string
+          size_bytes: number | null
+          storage_path: string | null
+          tags: string[]
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          alt?: string
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          kind?: string
+          mime_type?: string | null
+          provider?: string
+          size_bytes?: number | null
+          storage_path?: string | null
+          tags?: string[]
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          alt?: string
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          kind?: string
+          mime_type?: string | null
+          provider?: string
+          size_bytes?: number | null
+          storage_path?: string | null
+          tags?: string[]
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
+      nav_items: {
+        Row: {
+          created_at: string
+          id: string
+          label: string
+          link_type: string
+          sort_order: number
+          target: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label: string
+          link_type?: string
+          sort_order?: number
+          target: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string
+          link_type?: string
+          sort_order?: number
+          target?: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
+      project_media: {
+        Row: {
+          alt: string
+          created_at: string
+          id: string
+          kind: string
+          media_id: string | null
+          project_id: string
+          provider: string
+          sort_order: number
+          thumbnail_url: string | null
+          updated_at: string
+          url: string
+          visible: boolean
+        }
+        Insert: {
+          alt?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          media_id?: string | null
+          project_id: string
+          provider?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          updated_at?: string
+          url: string
+          visible?: boolean
+        }
+        Update: {
+          alt?: string
+          created_at?: string
+          id?: string
+          kind?: string
+          media_id?: string | null
+          project_id?: string
+          provider?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          updated_at?: string
+          url?: string
+          visible?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_media_media_id_fkey"
+            columns: ["media_id"]
+            isOneToOne: false
+            referencedRelation: "media"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_media_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
+          category: string
           client: string
+          cover_alt: string
           cover_url: string | null
           created_at: string
+          deleted_at: string | null
+          description: string
+          featured: boolean
           gradient: string
           id: string
           kind: string
           link_url: string | null
+          slug: string | null
           sort_order: number
+          status: string
+          tags: string[]
           title: string
           updated_at: string
+          video_url: string | null
+          visible: boolean
           year: string
         }
         Insert: {
+          category?: string
           client?: string
+          cover_alt?: string
           cover_url?: string | null
           created_at?: string
+          deleted_at?: string | null
+          description?: string
+          featured?: boolean
           gradient?: string
           id?: string
           kind?: string
           link_url?: string | null
+          slug?: string | null
           sort_order?: number
+          status?: string
+          tags?: string[]
           title: string
           updated_at?: string
+          video_url?: string | null
+          visible?: boolean
           year?: string
         }
         Update: {
+          category?: string
           client?: string
+          cover_alt?: string
           cover_url?: string | null
           created_at?: string
+          deleted_at?: string | null
+          description?: string
+          featured?: boolean
           gradient?: string
           id?: string
           kind?: string
           link_url?: string | null
+          slug?: string | null
           sort_order?: number
+          status?: string
+          tags?: string[]
           title?: string
           updated_at?: string
+          video_url?: string | null
+          visible?: boolean
           year?: string
         }
         Relationships: []
@@ -83,36 +257,123 @@ export type Database = {
       reviews: {
         Row: {
           avatar_url: string | null
+          company: string
           created_at: string
+          deleted_at: string | null
           id: string
           name: string
           quote: string
           rating: number
           role: string
           sort_order: number
+          status: string
           updated_at: string
+          visible: boolean
         }
         Insert: {
           avatar_url?: string | null
+          company?: string
           created_at?: string
+          deleted_at?: string | null
           id?: string
           name: string
           quote: string
           rating?: number
           role?: string
           sort_order?: number
+          status?: string
           updated_at?: string
+          visible?: boolean
         }
         Update: {
           avatar_url?: string | null
+          company?: string
           created_at?: string
+          deleted_at?: string | null
           id?: string
           name?: string
           quote?: string
           rating?: number
           role?: string
           sort_order?: number
+          status?: string
           updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
+      sections: {
+        Row: {
+          created_at: string
+          id: string
+          key: string
+          label: string
+          sort_order: number
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key: string
+          label: string
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key?: string
+          label?: string
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          created_at: string
+          deleted_at: string | null
+          description: string
+          icon: string
+          id: string
+          image_url: string | null
+          number: string
+          sort_order: number
+          status: string
+          title: string
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          deleted_at?: string | null
+          description?: string
+          icon?: string
+          id?: string
+          image_url?: string | null
+          number?: string
+          sort_order?: number
+          status?: string
+          title: string
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          deleted_at?: string | null
+          description?: string
+          icon?: string
+          id?: string
+          image_url?: string | null
+          number?: string
+          sort_order?: number
+          status?: string
+          title?: string
+          updated_at?: string
+          visible?: boolean
         }
         Relationships: []
       }
@@ -121,11 +382,20 @@ export type Database = {
           about_headline: string
           about_p1: string
           about_p2: string
+          animations_enabled: boolean
+          base_font_size: string
           brand_name: string
           contact_email: string
+          contact_form_button: string
           contact_headline: string
           cursor_color: string
+          cursor_enabled: boolean
+          draft_json: Json | null
+          font_body: string
+          font_display: string
           footer_text: string
+          hero_cta1_label: string
+          hero_cta2_label: string
           hero_eyebrow: string
           hero_image_url: string | null
           hero_line1: string
@@ -137,21 +407,39 @@ export type Database = {
           location_sub: string
           location_text: string
           marquee_text: string
+          nav_cta_label: string
           portrait_url: string | null
+          radius: string
           reviews_headline: string
+          seo_description: string
+          seo_og_image: string | null
+          seo_title: string
           services_headline: string
           services_json: Json
+          shadow_strength: string
           stat1_l: string
           stat1_n: string
           stat2_l: string
           stat2_n: string
           stat3_l: string
           stat3_n: string
+          theme_accent: string
           theme_bg: string
+          theme_border: string
+          theme_button_bg: string
+          theme_button_fg: string
           theme_foreground: string
+          theme_gradient_from: string
+          theme_gradient_to: string
+          theme_heading: string
+          theme_hover: string
+          theme_muted: string
           theme_primary: string
           theme_primary_glow: string
+          theme_secondary: string
+          timeline_headline: string
           updated_at: string
+          whatsapp_number: string
           work_headline: string
           work_subtitle: string
         }
@@ -159,11 +447,20 @@ export type Database = {
           about_headline?: string
           about_p1?: string
           about_p2?: string
+          animations_enabled?: boolean
+          base_font_size?: string
           brand_name?: string
           contact_email?: string
+          contact_form_button?: string
           contact_headline?: string
           cursor_color?: string
+          cursor_enabled?: boolean
+          draft_json?: Json | null
+          font_body?: string
+          font_display?: string
           footer_text?: string
+          hero_cta1_label?: string
+          hero_cta2_label?: string
           hero_eyebrow?: string
           hero_image_url?: string | null
           hero_line1?: string
@@ -175,21 +472,39 @@ export type Database = {
           location_sub?: string
           location_text?: string
           marquee_text?: string
+          nav_cta_label?: string
           portrait_url?: string | null
+          radius?: string
           reviews_headline?: string
+          seo_description?: string
+          seo_og_image?: string | null
+          seo_title?: string
           services_headline?: string
           services_json?: Json
+          shadow_strength?: string
           stat1_l?: string
           stat1_n?: string
           stat2_l?: string
           stat2_n?: string
           stat3_l?: string
           stat3_n?: string
+          theme_accent?: string
           theme_bg?: string
+          theme_border?: string
+          theme_button_bg?: string
+          theme_button_fg?: string
           theme_foreground?: string
+          theme_gradient_from?: string
+          theme_gradient_to?: string
+          theme_heading?: string
+          theme_hover?: string
+          theme_muted?: string
           theme_primary?: string
           theme_primary_glow?: string
+          theme_secondary?: string
+          timeline_headline?: string
           updated_at?: string
+          whatsapp_number?: string
           work_headline?: string
           work_subtitle?: string
         }
@@ -197,11 +512,20 @@ export type Database = {
           about_headline?: string
           about_p1?: string
           about_p2?: string
+          animations_enabled?: boolean
+          base_font_size?: string
           brand_name?: string
           contact_email?: string
+          contact_form_button?: string
           contact_headline?: string
           cursor_color?: string
+          cursor_enabled?: boolean
+          draft_json?: Json | null
+          font_body?: string
+          font_display?: string
           footer_text?: string
+          hero_cta1_label?: string
+          hero_cta2_label?: string
           hero_eyebrow?: string
           hero_image_url?: string | null
           hero_line1?: string
@@ -213,23 +537,77 @@ export type Database = {
           location_sub?: string
           location_text?: string
           marquee_text?: string
+          nav_cta_label?: string
           portrait_url?: string | null
+          radius?: string
           reviews_headline?: string
+          seo_description?: string
+          seo_og_image?: string | null
+          seo_title?: string
           services_headline?: string
           services_json?: Json
+          shadow_strength?: string
           stat1_l?: string
           stat1_n?: string
           stat2_l?: string
           stat2_n?: string
           stat3_l?: string
           stat3_n?: string
+          theme_accent?: string
           theme_bg?: string
+          theme_border?: string
+          theme_button_bg?: string
+          theme_button_fg?: string
           theme_foreground?: string
+          theme_gradient_from?: string
+          theme_gradient_to?: string
+          theme_heading?: string
+          theme_hover?: string
+          theme_muted?: string
           theme_primary?: string
           theme_primary_glow?: string
+          theme_secondary?: string
+          timeline_headline?: string
           updated_at?: string
+          whatsapp_number?: string
           work_headline?: string
           work_subtitle?: string
+        }
+        Relationships: []
+      }
+      timeline_items: {
+        Row: {
+          created_at: string
+          deleted_at: string | null
+          id: string
+          sort_order: number
+          text: string
+          title: string
+          updated_at: string
+          visible: boolean
+          year: string
+        }
+        Insert: {
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          sort_order?: number
+          text?: string
+          title: string
+          updated_at?: string
+          visible?: boolean
+          year: string
+        }
+        Update: {
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          sort_order?: number
+          text?: string
+          title?: string
+          updated_at?: string
+          visible?: boolean
+          year?: string
         }
         Relationships: []
       }

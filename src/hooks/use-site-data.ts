@@ -6,10 +6,10 @@ type Tables = Database["public"]["Tables"];
 
 export type ServiceItem = { n: string; t: string; d: string; icon: string };
 
-export type SiteSettings = Omit<Tables["site_settings"]["Row"], "services_json" | "draft_json"> & {
+export type SiteSettings = Omit<Tables["site_settings"]["Row"], "services_json"> & {
   services_json: ServiceItem[];
-  draft_json: Record<string, unknown> | null;
 };
+
 export type Project = Tables["projects"]["Row"];
 export type ProjectMedia = Tables["project_media"]["Row"];
 export type Review = Tables["reviews"]["Row"];

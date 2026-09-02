@@ -185,16 +185,26 @@ function Index() {
       </section>
 
       {/* MARQUEE */}
-      <section className="relative py-20 border-y border-border/50 overflow-hidden">
-        <div className="flex gap-16 w-max animate-marquee-x whitespace-nowrap text-6xl md:text-8xl font-bold text-chrome opacity-30">
+      <section
+        className="relative py-12 md:py-16 border-y border-border/50 overflow-hidden"
+        style={{
+          maskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+        }}
+      >
+        <div className="flex w-max animate-marquee-x whitespace-nowrap text-4xl md:text-6xl font-semibold tracking-tight">
           {Array.from({ length: 4 }).map((_, i) => (
-            <span key={i} className="inline-flex items-center gap-16 font-semibold">
-              {(settings?.marquee_text ?? "VFX ◆ EDITING ◆ 3D MOTION ◆ DIRECTION")}
-              <span className="text-primary-glow">◆</span>
+            <span key={i} className="inline-flex items-center gap-10 md:gap-14 pr-10 md:pr-14 leading-[1.2] py-1">
+              <span className="text-chrome">
+                {settings?.marquee_text ?? "VFX ◆ EDITING ◆ 3D MOTION ◆ DIRECTION"}
+              </span>
+              <span className="text-primary-glow text-2xl md:text-3xl">◆</span>
             </span>
           ))}
         </div>
       </section>
+
+
 
       {/* ABOUT (now before WORK) */}
       <section id="about" className="relative py-32 px-6 md:px-10 scroll-mt-24">

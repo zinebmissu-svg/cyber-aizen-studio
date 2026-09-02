@@ -49,6 +49,18 @@ const FILTERS = ["All", "VFX", "Editing", "3D Motion", "Direction"] as const;
 
 type ServiceItem = { n: string; t: string; d: string; icon: string };
 
+function LastWordGradient({ text, baseClass = "text-chrome" }: { text?: string; baseClass?: string }) {
+  const value = text?.trim() ?? "";
+  const i = value.lastIndexOf(" ");
+  if (i === -1) return <span className="text-violet-glow">{value}</span>;
+  return (
+    <>
+      <span className={baseClass}>{value.slice(0, i + 1)}</span>
+      <span className="text-violet-glow">{value.slice(i + 1)}</span>
+    </>
+  );
+}
+
 function TiltCard({ s }: { s: ServiceItem }) {
   const ref = useRef<HTMLDivElement>(null);
   const onMove = (e: MouseEvent) => {
@@ -156,9 +168,9 @@ function Index() {
           </div>
 
           <h1 className="font-bold leading-[0.9] tracking-tight text-[clamp(2.8rem,9vw,8rem)]">
-            <span className="block text-chrome">{settings?.hero_line1 ?? "Turning Ideas"}</span>
+            <span className="block"><LastWordGradient text={settings?.hero_line1 ?? "Turning Ideas"} /></span>
             <span className="block italic font-light text-violet-glow">{settings?.hero_line2 ?? "Into Moving"}</span>
-            <span className="block text-chrome">{settings?.hero_line3 ?? "Worlds."}</span>
+            <span className="block"><LastWordGradient text={settings?.hero_line3 ?? "Worlds."} /></span>
           </h1>
 
           <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-muted-foreground leading-relaxed">
@@ -211,7 +223,7 @@ function Index() {
         <div className="mx-auto max-w-6xl">
           <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 01 — About</div>
           <h2 className="text-5xl md:text-8xl font-bold text-chrome leading-[0.92]">
-            {settings?.about_headline ?? "A frame is a feeling."}
+            <LastWordGradient text={settings?.about_headline ?? "A frame is a feeling."} />
           </h2>
 
           <div className="mt-20 grid gap-12 md:grid-cols-[1fr_1.4fr] items-start">
@@ -250,7 +262,7 @@ function Index() {
           <div className="mb-16">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 02 — Portfolio</div>
             <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-              {settings?.work_headline ?? "Selected work"}
+              <LastWordGradient text={settings?.work_headline ?? "Selected work"} />
             </h2>
             <p className="mt-6 max-w-2xl text-muted-foreground">
               {settings?.work_subtitle}
@@ -322,7 +334,7 @@ function Index() {
           <div className="mb-16">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 03 — Services</div>
             <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-              {settings?.services_headline ?? "What I make"}
+              <LastWordGradient text={settings?.services_headline ?? "What I make"} />
             </h2>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -336,7 +348,7 @@ function Index() {
         <div className="mx-auto max-w-7xl px-6 md:px-10 mb-16">
           <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Reviews</div>
           <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-            {settings?.reviews_headline ?? "Words from collaborators"}
+            <LastWordGradient text={settings?.reviews_headline ?? "Words from collaborators"} />
           </h2>
         </div>
         <ReviewsMarquee reviews={reviews} />
@@ -347,7 +359,7 @@ function Index() {
         <div className="mx-auto max-w-6xl">
           <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Contact</div>
           <h2 className="text-5xl md:text-8xl font-bold text-chrome leading-[0.92]">
-            {settings?.contact_headline ?? "Let's make something moving."}
+            <LastWordGradient text={settings?.contact_headline ?? "Let's make something moving."} />
           </h2>
           <p className="mt-6 text-muted-foreground">Got a project? Let's talk.</p>
 

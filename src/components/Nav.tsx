@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+
 import { scrollToId } from "./SmoothScroll";
 import { useSiteData } from "@/hooks/use-site-data";
 

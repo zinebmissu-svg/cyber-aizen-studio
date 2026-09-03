@@ -74,7 +74,7 @@ export default function Timeline({ items = DEFAULT_ITEMS }: { items?: TimelineIt
   return (
     <section id="timeline" className="relative py-32 px-6 md:px-10 scroll-mt-24">
       <div className="mx-auto max-w-4xl">
-        <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-12">/ <span className="text-violet-glow">Timeline</span></div>
+        <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-12">/ <span className="text-gradient-purple">Timeline</span></div>
         <div ref={wrapRef} className="relative">
           <div className="absolute left-0 top-0 h-full w-px bg-border/60" />
           <div

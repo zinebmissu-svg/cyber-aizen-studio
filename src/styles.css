@@ -126,6 +126,13 @@
     color: transparent;
     text-shadow: 0 0 40px oklch(0.62 0.22 295 / 30%);
   }
+  .text-gradient-purple {
+    background: linear-gradient(135deg, oklch(0.82 0.18 295) 0%, oklch(0.55 0.24 295) 55%, oklch(0.32 0.28 295) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 48px oklch(0.62 0.22 295 / 45%);
+  }
   .grain::after {
     content: "";
     position: fixed;

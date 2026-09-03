@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+
 import { scrollToId } from "./SmoothScroll";
 import { useSiteData } from "@/hooks/use-site-data";
 
@@ -47,12 +47,6 @@ export function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link
-            to="/admin"
-            className="hidden md:inline-flex text-[10px] font-mono uppercase tracking-[0.25em] px-3 py-2 rounded-full border border-border text-muted-foreground hover:text-foreground hover:border-primary-glow/50 transition-colors"
-          >
-            Admin
-          </Link>
           <a
             href="#contact"
             onClick={(e) => handleClick(e, "contact")}

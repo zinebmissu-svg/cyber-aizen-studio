@@ -52,11 +52,11 @@ type ServiceItem = { n: string; t: string; d: string; icon: string };
 function LastWordGradient({ text, baseClass = "text-chrome" }: { text?: string; baseClass?: string }) {
   const value = text?.trim() ?? "";
   const i = value.lastIndexOf(" ");
-  if (i === -1) return <span className="text-violet-glow">{value}</span>;
+  if (i === -1) return <span className="text-gradient-purple">{value}</span>;
   return (
     <>
       <span className={baseClass}>{value.slice(0, i + 1)}</span>
-      <span className="text-violet-glow">{value.slice(i + 1)}</span>
+      <span className="text-gradient-purple">{value.slice(i + 1)}</span>
     </>
   );
 }

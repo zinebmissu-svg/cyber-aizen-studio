@@ -54,9 +54,9 @@ export default function VideoWork({
       out.push({
         id: `m-${m.id}`,
         url: m.url,
-        title: m.caption || parent?.title || "Motion piece",
+        title: m.alt || parent?.title || "Motion piece",
         subtitle: parent?.client ?? null,
-        poster: parent?.cover_url ?? null,
+        poster: m.thumbnail_url ?? parent?.cover_url ?? null,
       });
     }
     return out;

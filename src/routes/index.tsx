@@ -8,6 +8,7 @@ import { ReviewsMarquee } from "../components/ReviewsMarquee";
 import { scrollToId } from "../components/SmoothScroll";
 import { useSiteData, type Project } from "../hooks/use-site-data";
 import Timeline from "../components/Timeline";
+import VideoWork from "../components/VideoWork";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import { Instagram, Mail, MapPin, ArrowUpRight , MessageCircle} from "lucide-react";
@@ -111,7 +112,7 @@ const contactSchema = z.object({
 
 /* ============================================================ */
 function Index() {
-  const { settings, projects, reviews } = useSiteData();
+  const { settings, projects, projectMedia, reviews } = useSiteData();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
   const items: Project[] = projects.filter((p) => filter === "All" || p.kind === filter);
 
@@ -327,6 +328,9 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* VIDEO WORK */}
+      <VideoWork projects={projects} projectMedia={projectMedia} />
 
       {/* SERVICES */}
       <section id="services" className="relative py-32 px-6 md:px-10 scroll-mt-24">

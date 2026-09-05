@@ -9,7 +9,7 @@ import { scrollToId } from "../components/SmoothScroll";
 import { useSiteData, type Project } from "../hooks/use-site-data";
 import Timeline from "../components/Timeline";
 import VideoWork from "../components/VideoWork";
-import MovingGrid from "@/components/ui/hyper-grid";
+import GridBackground from "@/components/GridBackground";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import { Instagram, Mail, MapPin, ArrowUpRight , MessageCircle} from "lucide-react";

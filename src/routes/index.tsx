@@ -198,24 +198,11 @@ function Index() {
         </button>
       </section>
 
-      {/* HYPER GRID */}
-      <section className="relative border-y border-border/50">
-        <ClientOnly>
-          <MovingGrid className="h-[60vh] md:h-[75vh]">
-            <div className="h-full flex flex-col items-center justify-center text-center px-6 pointer-events-none">
-              <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-primary-glow mb-4">
-                / Interactive
-              </div>
-              <h2 className="text-4xl md:text-6xl font-bold text-chrome leading-[1.05]">
-                Move. Click. <span className="text-gradient-purple">Warp.</span>
-              </h2>
-              <p className="mt-5 max-w-xl text-sm md:text-base text-muted-foreground">
-                A living grid that reacts to your cursor — click anywhere to jump to warp speed.
-              </p>
-            </div>
-          </MovingGrid>
-        </ClientOnly>
-      </section>
+      {/* SITE-WIDE REACTIVE GRID (behind everything after the hero) */}
+      <ClientOnly>
+        <GridBackground />
+      </ClientOnly>
+
 
       {/* MARQUEE */}
       <section

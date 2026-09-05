@@ -9,6 +9,7 @@ import { scrollToId } from "../components/SmoothScroll";
 import { useSiteData, type Project } from "../hooks/use-site-data";
 import Timeline from "../components/Timeline";
 import VideoWork from "../components/VideoWork";
+import MovingGrid from "@/components/ui/hyper-grid";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 import { Instagram, Mail, MapPin, ArrowUpRight , MessageCircle} from "lucide-react";
@@ -195,6 +196,25 @@ function Index() {
           <span>Scroll</span>
           <span className="w-12 h-px bg-gradient-to-r from-primary-glow to-transparent" />
         </button>
+      </section>
+
+      {/* HYPER GRID */}
+      <section className="relative border-y border-border/50">
+        <ClientOnly>
+          <MovingGrid className="h-[60vh] md:h-[75vh]">
+            <div className="h-full flex flex-col items-center justify-center text-center px-6 pointer-events-none">
+              <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-primary-glow mb-4">
+                / Interactive
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold text-chrome leading-[1.05]">
+                Move. Click. <span className="text-gradient-purple">Warp.</span>
+              </h2>
+              <p className="mt-5 max-w-xl text-sm md:text-base text-muted-foreground">
+                A living grid that reacts to your cursor — click anywhere to jump to warp speed.
+              </p>
+            </div>
+          </MovingGrid>
+        </ClientOnly>
       </section>
 
       {/* MARQUEE */}

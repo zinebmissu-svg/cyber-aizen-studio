@@ -39,4 +39,4 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
-Sitemap: https://cyber-aizen-studio.lovable.app/sitemap.xml
+Sitemap: https://aizenvfx.com/sitemap.xml

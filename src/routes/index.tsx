@@ -114,7 +114,11 @@ export const Route = createFileRoute("/")({
         content:
           "Cinematic VFX, video editing, graphic design and 3D motion design by Aizen. Instagram: @aizen.visuals.",
       },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: SITE_URL }],
     scripts: [
       {
         type: "application/ld+json",

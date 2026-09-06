@@ -380,6 +380,27 @@ export type Database = {
         }
         Relationships: []
       }
+      site_drafts: {
+        Row: {
+          created_at: string
+          draft_json: Json | null
+          id: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          draft_json?: Json | null
+          id: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          draft_json?: Json | null
+          id?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       site_settings: {
         Row: {
           about_headline: string
@@ -393,7 +414,6 @@ export type Database = {
           contact_headline: string
           cursor_color: string
           cursor_enabled: boolean
-          draft_json: Json | null
           font_body: string
           font_display: string
           footer_text: string
@@ -458,7 +478,6 @@ export type Database = {
           contact_headline?: string
           cursor_color?: string
           cursor_enabled?: boolean
-          draft_json?: Json | null
           font_body?: string
           font_display?: string
           footer_text?: string
@@ -523,7 +542,6 @@ export type Database = {
           contact_headline?: string
           cursor_color?: string
           cursor_enabled?: boolean
-          draft_json?: Json | null
           font_body?: string
           font_display?: string
           footer_text?: string

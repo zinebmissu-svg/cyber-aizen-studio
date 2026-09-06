@@ -54,6 +54,7 @@ export type Database = {
           title: string
           updated_at: string
           url: string
+          visible: boolean
         }
         Insert: {
           alt?: string
@@ -70,6 +71,7 @@ export type Database = {
           title?: string
           updated_at?: string
           url: string
+          visible?: boolean
         }
         Update: {
           alt?: string
@@ -86,6 +88,7 @@ export type Database = {
           title?: string
           updated_at?: string
           url?: string
+          visible?: boolean
         }
         Relationships: []
       }

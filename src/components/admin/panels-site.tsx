@@ -496,7 +496,7 @@ export function SettingsPanel({ email, settings, onSaved }: { email: string; set
           <Text label="Brand name" value={s.brand_name} onChange={(v) => set("brand_name", v)} />
           <Text label="Footer text" value={s.footer_text} onChange={(v) => set("footer_text", v)} />
         </Group>
-        <Num label="Draft stored" value={s.draft_json ? 1 : 0} onChange={() => {}} />
+        
         <DraftBar {...f} />
       </Panel>
     </div>

@@ -15,7 +15,7 @@ import { z } from "zod";
 import { Instagram, Mail, MapPin, ArrowUpRight , MessageCircle} from "lucide-react";
 
 
-const SITE_URL = "https://cyber-aizen-studio.lovable.app";
+const SITE_URL = "https://aizenvfx.com";
 
 const structuredData = {
   "@context": "https://schema.org",

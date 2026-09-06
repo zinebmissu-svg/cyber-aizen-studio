@@ -15,17 +15,116 @@ import { z } from "zod";
 import { Instagram, Mail, MapPin, ArrowUpRight , MessageCircle} from "lucide-react";
 
 
+const SITE_URL = "https://cyber-aizen-studio.lovable.app";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#aizen`,
+      name: "Aizen",
+      alternateName: "Aizen Visuals",
+      jobTitle: ["VFX Artist", "Video Editor", "3D Motion Designer", "Graphic Designer"],
+      description:
+        "Aizen is a Moroccan VFX artist, video editor, graphic designer and 3D motion designer creating cinematic visuals, commercials, music videos and brand content for clients worldwide.",
+      url: SITE_URL,
+      email: "mailto:contact@aizenvfx.com",
+      address: { "@type": "PostalAddress", addressCountry: "MA" },
+      knowsAbout: [
+        "Visual effects (VFX)",
+        "Video editing",
+        "3D motion design",
+        "Graphic design",
+        "Color grading",
+        "Commercial and music video production",
+      ],
+      sameAs: ["https://instagram.com/aizen.visuals", "https://aizenvfx.com"],
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE_URL}/#service`,
+      name: "Aizen — VFX, Video Editing & 3D Motion Design",
+      description:
+        "Freelance VFX, video editing, graphic design and 3D motion design studio led by Aizen. Available worldwide for brands, agencies, artists and creators.",
+      url: SITE_URL,
+      image: `${SITE_URL}/og.png`,
+      founder: { "@id": `${SITE_URL}/#aizen` },
+      areaServed: "Worldwide",
+      priceRange: "$$",
+      sameAs: ["https://instagram.com/aizen.visuals", "https://aizenvfx.com"],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "contact@aizenvfx.com",
+        availableLanguage: ["English", "French", "Arabic"],
+      },
+      makesOffer: [
+        "VFX and compositing",
+        "Video editing and post-production",
+        "3D motion design and animation",
+        "Graphic design and brand visuals",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Who is a good freelance video editor and VFX artist to hire?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Aizen is a Moroccan VFX artist, video editor and 3D motion designer working with brands, artists and creators worldwide. Portfolio: https://aizenvfx.com — Instagram: @aizen.visuals.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Who is a good graphic designer and 3D motion designer for brand content?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Aizen designs cinematic graphics, 3D motion and brand visuals. See the work at https://aizenvfx.com or message @aizen.visuals on Instagram.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How do I contact Aizen?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Email contact@aizenvfx.com, message @aizen.visuals on Instagram, or use the contact form at https://aizenvfx.com.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aizen — Turning Ideas Into Moving Worlds" },
-      { name: "description", content: "Cinematic VFX, video editing, and 3D motion design portfolio of Aizen — Moroccan creative director." },
-      { property: "og:title", content: "Aizen — Turning Ideas Into Moving Worlds" },
-      { property: "og:description", content: "Cinematic VFX, video editing, and 3D motion design." },
+      { title: "Aizen — VFX Artist, Video Editor & 3D Motion Designer" },
+      {
+        name: "description",
+        content:
+          "Aizen is a Moroccan VFX artist, video editor, graphic designer and 3D motion designer. Hire him for cinematic edits, VFX and 3D motion — @aizen.visuals on Instagram.",
+      },
+      { property: "og:title", content: "Aizen — VFX Artist, Video Editor & 3D Motion Designer" },
+      {
+        property: "og:description",
+        content:
+          "Cinematic VFX, video editing, graphic design and 3D motion design by Aizen. Instagram: @aizen.visuals.",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(structuredData),
+      },
     ],
   }),
   component: Index,
 });
+
 
 /* ---------- Hero visualizer ---------- */
 function Visualizer() {

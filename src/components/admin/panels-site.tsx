@@ -46,18 +46,24 @@ function useSettingsForm(settings: SiteSettings, onSaved: () => void) {
   };
   const saveDraft = async () => {
     const { error } = await supabase
-      .from("site_settings")
-      .update({ draft_json: s as never })
-      .eq("id", 1);
+      .from("site_drafts")
+      .upsert({ id: 1, draft_json: s as never });
     if (error) toast.error(error.message);
     else toast.success("Draft saved (not published)");
   };
-  const restoreDraft = () => {
-    const d = settings.draft_json as unknown as SiteSettings | null;
+  const restoreDraft = async () => {
+    const { data, error } = await supabase
+      .from("site_drafts")
+      .select("draft_json")
+      .eq("id", 1)
+      .maybeSingle();
+    if (error) return toast.error(error.message);
+    const d = (data?.draft_json ?? null) as unknown as SiteSettings | null;
     if (!d) return toast.info("No draft stored");
     setS({ ...d, id: 1 });
     toast.success("Draft loaded into the editor");
   };
+
   return { s, set, saving, save, saveDraft, restoreDraft };
 }
 

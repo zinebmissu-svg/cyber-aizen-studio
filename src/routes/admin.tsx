@@ -18,6 +18,7 @@ import {
   ServicesPanel,
   TestimonialsPanel,
   TimelinePanel,
+  PricingPanel,
   MediaPanel,
 } from "@/components/admin/panels-collections";
 

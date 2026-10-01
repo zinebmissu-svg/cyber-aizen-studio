@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import type { Project, ProjectMedia, Review, Service, TimelineRow, MediaRow } from "@/hooks/use-site-data";
+import type { Project, ProjectMedia, Review, Service, TimelineRow, MediaRow, PricingPlan } from "@/hooks/use-site-data";
 import {
   Panel,
   Group,

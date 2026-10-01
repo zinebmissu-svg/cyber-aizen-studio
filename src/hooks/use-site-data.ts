@@ -96,5 +96,5 @@ export function useSiteData(opts: { admin?: boolean } = {}): SiteData {
     refresh();
   }, [refresh]);
 
-  return { settings, projects, projectMedia, reviews, services, nav, sections, timeline, loading, refresh };
+  return { settings, projects, projectMedia, reviews, services, nav, sections, timeline, pricingPlans, loading, refresh };
 }

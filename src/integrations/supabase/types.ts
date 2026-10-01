@@ -125,6 +125,57 @@ export type Database = {
         }
         Relationships: []
       }
+      pricing_plans: {
+        Row: {
+          badge: string
+          created_at: string
+          cta_label: string
+          deleted_at: string | null
+          description: string
+          featured: boolean
+          features: Json
+          id: string
+          name: string
+          period: string
+          price: string
+          sort_order: number
+          updated_at: string
+          visible: boolean
+        }
+        Insert: {
+          badge?: string
+          created_at?: string
+          cta_label?: string
+          deleted_at?: string | null
+          description?: string
+          featured?: boolean
+          features?: Json
+          id?: string
+          name: string
+          period?: string
+          price?: string
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Update: {
+          badge?: string
+          created_at?: string
+          cta_label?: string
+          deleted_at?: string | null
+          description?: string
+          featured?: boolean
+          features?: Json
+          id?: string
+          name?: string
+          period?: string
+          price?: string
+          sort_order?: number
+          updated_at?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       project_media: {
         Row: {
           alt: string
@@ -432,6 +483,8 @@ export type Database = {
           marquee_text: string
           nav_cta_label: string
           portrait_url: string | null
+          pricing_headline: string
+          pricing_subtitle: string
           radius: string
           reviews_headline: string
           seo_description: string
@@ -496,6 +549,8 @@ export type Database = {
           marquee_text?: string
           nav_cta_label?: string
           portrait_url?: string | null
+          pricing_headline?: string
+          pricing_subtitle?: string
           radius?: string
           reviews_headline?: string
           seo_description?: string
@@ -560,6 +615,8 @@ export type Database = {
           marquee_text?: string
           nav_cta_label?: string
           portrait_url?: string | null
+          pricing_headline?: string
+          pricing_subtitle?: string
           radius?: string
           reviews_headline?: string
           seo_description?: string

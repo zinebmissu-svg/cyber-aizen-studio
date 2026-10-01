@@ -19,6 +19,10 @@ export type SectionRow = Tables["sections"]["Row"];
 export type TimelineRow = Tables["timeline_items"]["Row"];
 export type MediaRow = Tables["media"]["Row"];
 
+export type PricingPlan = Omit<Tables["pricing_plans"]["Row"], "features"> & {
+  features: string[];
+};
+
 export type SiteData = {
   settings: SiteSettings | null;
   projects: Project[];

@@ -6,7 +6,7 @@ import { MagneticButton } from "../components/MagneticButton";
 import { Portrait3D } from "../components/Portrait3D";
 import { ReviewsMarquee } from "../components/ReviewsMarquee";
 import { scrollToId } from "../components/SmoothScroll";
-import { useSiteData, type Project } from "../hooks/use-site-data";
+import { useSiteData, type Project, type PricingPlan } from "../hooks/use-site-data";
 import Timeline from "../components/Timeline";
 import VideoWork from "../components/VideoWork";
 import GridBackground from "@/components/GridBackground";
@@ -203,6 +203,64 @@ function TiltCard({ s }: { s: ServiceItem }) {
       <div className="relative mt-8 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/70">
         <span className="w-8 h-px bg-primary-glow transition-all duration-500 group-hover:w-16" />
         <span>Inquire</span>
+      </div>
+    </div>
+  );
+}
+
+function PricingCard({ plan }: { plan: PricingPlan }) {
+  const featured = plan.featured;
+  return (
+    <div
+      data-cursor-label={plan.cta_label || "Start"}
+      className={`group relative rounded-3xl p-[1.5px] transition-transform duration-300 will-change-transform ${
+        featured
+          ? "bg-gradient-to-b from-primary-glow/80 via-primary/40 to-transparent shadow-[0_0_60px_-15px_oklch(0.62_0.22_295/60%)]"
+          : "bg-border/40 hover:bg-primary-glow/30"
+      }`}
+    >
+      <div className="relative h-full rounded-3xl glass-strong p-8 flex flex-col overflow-hidden">
+        {featured && (
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-64 h-48 rounded-full bg-primary/30 blur-3xl opacity-60 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" />
+        )}
+
+        <div className="relative flex items-center justify-between mb-6">
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary-glow">{plan.name}</span>
+          {plan.badge && (
+            <span className="font-mono text-[9px] uppercase tracking-[0.25em] px-3 py-1 rounded-full bg-primary/20 border border-primary-glow/40 text-violet-glow">
+              {plan.badge}
+            </span>
+          )}
+        </div>
+
+        <div className="relative flex items-baseline gap-2">
+          <span className="text-4xl md:text-5xl font-bold text-chrome">{plan.price}</span>
+          {plan.period && <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{plan.period}</span>}
+        </div>
+
+        {plan.description && <p className="relative mt-4 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>}
+
+        <ul className="relative mt-6 space-y-3 flex-1">
+          {plan.features.map((f, i) => (
+            <li key={i} className="flex items-start gap-3 text-sm text-foreground/85">
+              <span className="mt-1.5 w-1.5 h-1.5 shrink-0 rounded-full bg-primary-glow shadow-[0_0_8px_oklch(0.62_0.22_295/80%)]" />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="relative mt-8 pt-6 border-t border-border/50">
+          <button
+            onClick={() => scrollToId("contact")}
+            className={`w-full py-3 rounded-full font-mono text-[10px] uppercase tracking-[0.25em] transition-colors ${
+              featured
+                ? "bg-foreground text-background hover:bg-primary hover:text-primary-foreground"
+                : "border border-border text-muted-foreground hover:text-foreground hover:border-primary-glow/50"
+            }`}
+          >
+            {plan.cta_label || "Start a project"}
+          </button>
+        </div>
       </div>
     </div>
   );

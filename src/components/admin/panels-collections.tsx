@@ -703,6 +703,135 @@ export function TimelinePanel({ rows, onChanged }: { rows: TimelineRow[]; onChan
   );
 }
 
+/* ================================ Pricing ================================ */
+
+export function PricingPanel({ rows, onChanged }: { rows: PricingPlan[]; onChanged: () => void }) {
+  const [items, setItems] = useState<PricingPlan[]>(rows);
+  const [saving, setSaving] = useState(false);
+  const confirm = useConfirm();
+  useEffect(() => setItems(rows), [rows]);
+
+  const patch = (id: string, p: Partial<PricingPlan>) =>
+    setItems((prev) => prev.map((x) => (x.id === id ? { ...x, ...p } : x)));
+
+  const saveAll = async () => {
+    setSaving(true);
+    for (const pl of items) {
+      const features = pl.features.map((f) => f.trim()).filter(Boolean);
+      const { error } = await supabase
+        .from("pricing_plans")
+        .update({
+          name: pl.name,
+          price: pl.price,
+          period: pl.period,
+          description: pl.description,
+          features,
+          badge: pl.badge,
+          cta_label: pl.cta_label,
+          featured: pl.featured,
+          visible: pl.visible,
+        })
+        .eq("id", pl.id);
+      if (error) {
+        toast.error(error.message);
+        setSaving(false);
+        return;
+      }
+    }
+    await persistOrder("pricing_plans", items.map((i) => i.id));
+    setSaving(false);
+    toast.success("Pricing saved");
+    onChanged();
+  };
+
+  const add = async () => {
+    const { error } = await supabase.from("pricing_plans").insert({
+      name: "New package",
+      price: "$0",
+      period: "/ project",
+      description: "",
+      features: [],
+      badge: "",
+      cta_label: "Start a project",
+      featured: false,
+      visible: true,
+      sort_order: items.length,
+    });
+    if (error) return toast.error(error.message);
+    onChanged();
+  };
+
+  const remove = (pl: PricingPlan) =>
+    confirm.ask("Delete plan?", `"${pl.name}" will be removed from the pricing section.`, async () => {
+      const { error } = await supabase.from("pricing_plans").update({ deleted_at: new Date().toISOString() }).eq("id", pl.id);
+      if (error) return toast.error(error.message);
+      onChanged();
+    });
+
+  const move = async (i: number, d: -1 | 1) => {
+    const next = moveItem(items, i, i + d);
+    setItems(next);
+    await persistOrder("pricing_plans", next.map((x) => x.id));
+  };
+
+  return (
+    <Panel
+      title="Pricing"
+      desc="Packages shown in the pricing section. One plan can be highlighted as featured."
+      actions={
+        <div className="flex gap-2">
+          <Btn variant="ghost" onClick={saveAll} disabled={saving}>
+            {saving ? "Saving…" : "Save all"}
+          </Btn>
+          <Btn onClick={add}>+ New plan</Btn>
+        </div>
+      }
+    >
+      {items.length === 0 && <Empty>No pricing plans yet.</Empty>}
+      <div className="space-y-4">
+        {items.map((pl, i) => (
+          <Row
+            key={pl.id}
+            onUp={() => move(i, -1)}
+            onDown={() => move(i, 1)}
+            badges={
+              <>
+                <Toggle label="Visible" value={pl.visible} onChange={(v) => patch(pl.id, { visible: v })} />
+                <Toggle label="Featured" value={pl.featured} onChange={(v) => patch(pl.id, { featured: v })} />
+                <div className="ml-auto">
+                  <Btn variant="danger" onClick={() => remove(pl)}>
+                    Delete
+                  </Btn>
+                </div>
+              </>
+            }
+          >
+            <Group cols={4}>
+              <Text label="Plan name" value={pl.name} onChange={(v) => patch(pl.id, { name: v })} />
+              <Text label="Price" value={pl.price} onChange={(v) => patch(pl.id, { price: v })} hint="e.g. $249 or Custom" />
+              <Text label="Period" value={pl.period} onChange={(v) => patch(pl.id, { period: v })} hint="e.g. / video" />
+              <Text label="Badge" value={pl.badge} onChange={(v) => patch(pl.id, { badge: v })} hint="e.g. Most popular" />
+            </Group>
+            <Group cols={1}>
+              <Area label="Description" rows={2} value={pl.description} onChange={(v) => patch(pl.id, { description: v })} />
+              <Area
+                label="Features (one per line)"
+                rows={5}
+                value={pl.features.join("\n")}
+                onChange={(v) => patch(pl.id, { features: v.split("\n") })}
+              />
+            </Group>
+            <Group cols={1}>
+              <Text label="Button label" value={pl.cta_label} onChange={(v) => patch(pl.id, { cta_label: v })} />
+            </Group>
+          </Row>
+        ))}
+      </div>
+      {confirm.node}
+    </Panel>
+  );
+}
+
 /* ================================ Media library ================================ */
 
 export function MediaPanel() {

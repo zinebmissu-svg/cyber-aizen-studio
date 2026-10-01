@@ -806,7 +806,7 @@ export function PricingPanel({ rows, onChanged }: { rows: PricingPlan[]; onChang
               </>
             }
           >
-            <Group cols={4}>
+            <Group cols={3}>
               <Text label="Plan name" value={pl.name} onChange={(v) => patch(pl.id, { name: v })} />
               <Text label="Price" value={pl.price} onChange={(v) => patch(pl.id, { price: v })} hint="e.g. $249 or Custom" />
               <Text label="Period" value={pl.period} onChange={(v) => patch(pl.id, { period: v })} hint="e.g. / video" />

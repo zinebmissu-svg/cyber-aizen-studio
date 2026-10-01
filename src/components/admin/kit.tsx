@@ -420,7 +420,7 @@ export function OrderButtons({ onUp, onDown }: { onUp: () => void; onDown: () =>
   );
 }
 
-export async function persistOrder(table: "projects" | "reviews" | "services" | "nav_items" | "sections" | "timeline_items" | "project_media", ids: string[]) {
+export async function persistOrder(table: "projects" | "reviews" | "services" | "nav_items" | "sections" | "timeline_items" | "project_media" | "pricing_plans", ids: string[]) {
   await Promise.all(ids.map((id, i) => supabase.from(table).update({ sort_order: i }).eq("id", id)));
 }
 

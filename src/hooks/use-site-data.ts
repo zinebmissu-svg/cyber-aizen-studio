@@ -19,6 +19,10 @@ export type SectionRow = Tables["sections"]["Row"];
 export type TimelineRow = Tables["timeline_items"]["Row"];
 export type MediaRow = Tables["media"]["Row"];
 
+export type PricingPlan = Omit<Tables["pricing_plans"]["Row"], "features"> & {
+  features: string[];
+};
+
 export type SiteData = {
   settings: SiteSettings | null;
   projects: Project[];
@@ -28,6 +32,7 @@ export type SiteData = {
   nav: NavItem[];
   sections: SectionRow[];
   timeline: TimelineRow[];
+  pricingPlans: PricingPlan[];
   loading: boolean;
   refresh: () => Promise<void>;
 };
@@ -46,6 +51,7 @@ export function useSiteData(opts: { admin?: boolean } = {}): SiteData {
   const [nav, setNav] = useState<NavItem[]>([]);
   const [sections, setSections] = useState<SectionRow[]>([]);
   const [timeline, setTimeline] = useState<TimelineRow[]>([]);
+  const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([]);
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
@@ -58,7 +64,7 @@ export function useSiteData(opts: { admin?: boolean } = {}): SiteData {
       return out;
     };
 
-    const [s, p, pm, r, sv, nv, sec, tl] = await Promise.all([
+    const [s, p, pm, r, sv, nv, sec, tl, pp] = await Promise.all([
       supabase.from("site_settings").select("*").eq("id", 1).maybeSingle(),
       live(supabase.from("projects").select("*").order("sort_order") as never, true),
       supabase.from("project_media").select("*").order("sort_order"),
@@ -71,6 +77,7 @@ export function useSiteData(opts: { admin?: boolean } = {}): SiteData {
         ? supabase.from("sections").select("*").order("sort_order")
         : supabase.from("sections").select("*").eq("visible", true).order("sort_order"),
       live(supabase.from("timeline_items").select("*").order("sort_order") as never, false),
+      live(supabase.from("pricing_plans").select("*").order("sort_order") as never, false),
     ]);
 
     if (s.data) setSettings(s.data as unknown as SiteSettings);
@@ -81,6 +88,7 @@ export function useSiteData(opts: { admin?: boolean } = {}): SiteData {
     setNav((nv.data ?? []) as NavItem[]);
     setSections((sec.data ?? []) as SectionRow[]);
     setTimeline(((tl as { data: TimelineRow[] | null }).data ?? []));
+    setPricingPlans(((pp as { data: PricingPlan[] | null }).data ?? []).map((pl) => ({ ...pl, features: (pl.features as unknown as string[]) ?? [] })));
     setLoading(false);
   }, [admin]);
 
@@ -88,5 +96,5 @@ export function useSiteData(opts: { admin?: boolean } = {}): SiteData {
     refresh();
   }, [refresh]);
 
-  return { settings, projects, projectMedia, reviews, services, nav, sections, timeline, loading, refresh };
+  return { settings, projects, projectMedia, reviews, services, nav, sections, timeline, pricingPlans, loading, refresh };
 }

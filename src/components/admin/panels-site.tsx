@@ -163,11 +163,13 @@ export function HomepagePanel({ settings, onSaved }: { settings: SiteSettings; o
           <Text label="Timeline headline" value={s.timeline_headline} onChange={(v) => set("timeline_headline", v)} />
           <Text label="Portfolio headline" value={s.work_headline} onChange={(v) => set("work_headline", v)} />
           <Text label="Services headline" value={s.services_headline} onChange={(v) => set("services_headline", v)} />
+          <Text label="Pricing headline" value={s.pricing_headline} onChange={(v) => set("pricing_headline", v)} />
           <Text label="Testimonials headline" value={s.reviews_headline} onChange={(v) => set("reviews_headline", v)} />
           <Text label="Contact headline" value={s.contact_headline} onChange={(v) => set("contact_headline", v)} />
           <Text label="Contact form button" value={s.contact_form_button} onChange={(v) => set("contact_form_button", v)} />
         </Group>
         <Area label="Portfolio subtitle" value={s.work_subtitle} onChange={(v) => set("work_subtitle", v)} rows={3} />
+        <Area label="Pricing subtitle" value={s.pricing_subtitle} onChange={(v) => set("pricing_subtitle", v)} rows={2} />
       </Panel>
 
       <Panel title="Contact, socials & footer">

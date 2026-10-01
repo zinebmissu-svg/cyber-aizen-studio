@@ -51,6 +51,7 @@ export function useSiteData(opts: { admin?: boolean } = {}): SiteData {
   const [nav, setNav] = useState<NavItem[]>([]);
   const [sections, setSections] = useState<SectionRow[]>([]);
   const [timeline, setTimeline] = useState<TimelineRow[]>([]);
+  const [pricingPlans, setPricingPlans] = useState<PricingPlan[]>([]);
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {

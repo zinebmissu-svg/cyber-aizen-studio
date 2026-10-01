@@ -181,6 +181,7 @@ const NAV: { group: string; items: { key: string; label: string }[] }[] = [
     items: [
       { key: "portfolio", label: "Portfolio" },
       { key: "services", label: "Services" },
+      { key: "pricing", label: "Pricing" },
       { key: "testimonials", label: "Testimonials" },
       { key: "media", label: "Media library" },
     ],
@@ -200,7 +201,7 @@ function Dashboard({ email }: { email: string }) {
   const [tab, setTab] = useState("overview");
   const [menu, setMenu] = useState(false);
   const data = useSiteData({ admin: true });
-  const { settings, projects, projectMedia, reviews, services, nav, sections, timeline, loading, refresh } = data;
+  const { settings, projects, projectMedia, reviews, services, nav, sections, timeline, pricingPlans, loading, refresh } = data;
 
   const go = (t: string) => {
     setTab(t);
@@ -225,6 +226,8 @@ function Dashboard({ email }: { email: string }) {
         return <PortfolioPanel rows={projects} media={projectMedia} onChanged={refresh} />;
       case "services":
         return <ServicesPanel rows={services} onChanged={refresh} />;
+      case "pricing":
+        return <PricingPanel rows={pricingPlans} onChanged={refresh} />;
       case "testimonials":
         return <TestimonialsPanel rows={reviews} onChanged={refresh} />;
       case "media":

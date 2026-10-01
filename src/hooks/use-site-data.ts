@@ -32,6 +32,7 @@ export type SiteData = {
   nav: NavItem[];
   sections: SectionRow[];
   timeline: TimelineRow[];
+  pricingPlans: PricingPlan[];
   loading: boolean;
   refresh: () => Promise<void>;
 };

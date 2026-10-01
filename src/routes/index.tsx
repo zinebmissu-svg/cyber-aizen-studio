@@ -274,7 +274,7 @@ const contactSchema = z.object({
 
 /* ============================================================ */
 function Index() {
-  const { settings, projects, projectMedia, reviews } = useSiteData();
+  const { settings, projects, projectMedia, reviews, pricingPlans } = useSiteData();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
   const items: Project[] = projects.filter((p) => filter === "All" || p.kind === filter);
 
@@ -515,10 +515,30 @@ function Index() {
         </div>
       </section>
 
+      {/* PRICING */}
+      <section id="pricing" className="relative py-32 px-6 md:px-10 scroll-mt-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-16 text-center">
+            <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Pricing</div>
+            <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
+              <LastWordGradient text={settings?.pricing_headline ?? "Simple, transparent pricing."} />
+            </h2>
+            {settings?.pricing_subtitle && (
+              <p className="mt-6 max-w-2xl mx-auto text-muted-foreground">{settings.pricing_subtitle}</p>
+            )}
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+            {pricingPlans.map((plan) => (
+              <PricingCard key={plan.id} plan={plan} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* REVIEWS */}
       <section id="reviews" className="relative py-32 scroll-mt-24">
         <div className="mx-auto max-w-7xl px-6 md:px-10 mb-16">
-          <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Reviews</div>
+          <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 05 — Reviews</div>
           <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
             <LastWordGradient text={settings?.reviews_headline ?? "Words from collaborators"} />
           </h2>
@@ -529,7 +549,7 @@ function Index() {
       {/* CONTACT */}
       <section id="contact" className="relative py-32 px-6 md:px-10 scroll-mt-24">
         <div className="mx-auto max-w-6xl">
-          <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Contact</div>
+          <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 06 — Contact</div>
           <h2 className="text-5xl md:text-8xl font-bold text-chrome leading-[0.92]">
             <LastWordGradient text={settings?.contact_headline ?? "Let's make something moving."} />
           </h2>

@@ -225,24 +225,24 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
         )}
 
         <div className="relative flex items-center justify-between mb-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary-glow">{plan.name}</span>
+          <span className={`font-mono text-[10px] uppercase tracking-[0.3em] ${featured ? "text-foreground/80" : "text-primary-glow"}`}>{plan.name}</span>
           {plan.badge && (
-            <span className="font-mono text-[9px] uppercase tracking-[0.25em] px-3 py-1 rounded-full bg-primary/20 border border-primary-glow/40 text-violet-glow">
+            <span className={`font-mono text-[9px] uppercase tracking-[0.25em] px-3 py-1 rounded-full ${featured ? "bg-background/15 border border-foreground/30 text-foreground" : "bg-primary/20 border border-primary-glow/40 text-violet-glow"}`}>
               {plan.badge}
             </span>
           )}
         </div>
 
         <div className="relative flex items-baseline gap-2">
-          <span className="text-4xl md:text-5xl font-bold text-chrome">{plan.price}</span>
-          {plan.period && <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{plan.period}</span>}
+          <span className={`text-4xl md:text-5xl font-bold ${featured ? "text-foreground" : "text-chrome"}`}>{plan.price}</span>
+          {plan.period && <span className={`font-mono text-[10px] uppercase tracking-[0.25em] ${featured ? "text-foreground/70" : "text-muted-foreground"}`}>{plan.period}</span>}
         </div>
 
-        {plan.description && <p className="relative mt-4 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>}
+        {plan.description && <p className={`relative mt-4 text-sm leading-relaxed ${featured ? "text-foreground/80" : "text-muted-foreground"}`}>{plan.description}</p>}
 
         <ul className="relative mt-6 space-y-3 flex-1">
           {plan.features.map((f, i) => (
-            <li key={i} className="flex items-start gap-3 text-sm text-foreground/85">
+            <li key={i} className={`flex items-start gap-3 text-sm ${featured ? "text-foreground/90" : "text-foreground/85"}`}>
               <span className="mt-1.5 w-1.5 h-1.5 shrink-0 rounded-full bg-primary-glow shadow-[0_0_8px_oklch(0.62_0.22_295/80%)]" />
               <span>{f}</span>
             </li>

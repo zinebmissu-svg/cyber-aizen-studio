@@ -128,6 +128,7 @@ export type Database = {
       pricing_plans: {
         Row: {
           badge: string
+          category: string
           created_at: string
           cta_label: string
           deleted_at: string | null
@@ -144,6 +145,7 @@ export type Database = {
         }
         Insert: {
           badge?: string
+          category?: string
           created_at?: string
           cta_label?: string
           deleted_at?: string | null
@@ -160,6 +162,7 @@ export type Database = {
         }
         Update: {
           badge?: string
+          category?: string
           created_at?: string
           cta_label?: string
           deleted_at?: string | null

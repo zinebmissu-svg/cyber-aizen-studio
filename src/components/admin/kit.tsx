@@ -140,16 +140,29 @@ export function Num({ label, value, onChange, min, max }: { label: string; value
   );
 }
 
-export function Select({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: string[] }) {
+export function Select({
+  label,
+  value,
+  onChange,
+  options,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: Array<string | { value: string; label: string }>;
+}) {
   return (
     <label className="block">
       <Lbl>{label}</Lbl>
       <select value={value} onChange={(e) => onChange(e.target.value)} className={`${inputCls} bg-background`}>
-        {options.map((o) => (
-          <option key={o} value={o}>
-            {o}
+        {options.map((option) => {
+          const normalized = typeof option === "string" ? { value: option, label: option } : option;
+          return (
+          <option key={normalized.value} value={normalized.value}>
+            {normalized.label}
           </option>
-        ))}
+          );
+        })}
       </select>
     </label>
   );

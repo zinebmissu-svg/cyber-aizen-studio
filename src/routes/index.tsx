@@ -139,8 +139,8 @@ function Visualizer() {
           key={i}
           className="w-[3px] rounded-full animate-pulse-glow"
           style={{
-            height: `${10 + Math.abs(Math.sin(i * 0.4) * 40)}px`,
-            background: "linear-gradient(180deg, oklch(0.85 0.15 295), oklch(0.45 0.2 295))",
+            height: `${(10 + Math.abs(Math.sin(i * 0.4) * 40)).toFixed(4)}px`,
+            backgroundImage: "linear-gradient(180deg, oklch(0.85 0.15 295), oklch(0.45 0.2 295))",
             animationDelay: `${(i % 12) * 0.08}s`,
             boxShadow: "0 0 10px oklch(0.62 0.22 295 / 60%)",
           }}

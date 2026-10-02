@@ -24,6 +24,10 @@ import {
 
 const CATEGORIES = ["Graphic Design", "Video Editing", "VFX", "3D", "Motion Design", "Web Development", "Other"];
 const STATUSES = ["draft", "published", "unpublished"];
+const PRICING_CATEGORIES = [
+  { value: "design", label: "Design Pricing" },
+  { value: "video_editing", label: "Video Editing Pricing" },
+];
 
 function Row({
   children,
@@ -726,6 +730,7 @@ export function PricingPanel({ rows, onChanged }: { rows: PricingPlan[]; onChang
           period: pl.period,
           description: pl.description,
           features,
+          category: pl.category,
           badge: pl.badge,
           cta_label: pl.cta_label,
           featured: pl.featured,
@@ -753,6 +758,7 @@ export function PricingPanel({ rows, onChanged }: { rows: PricingPlan[]; onChang
       features: [],
       badge: "",
       cta_label: "Start a project",
+      category: "design",
       featured: false,
       visible: true,
       sort_order: items.length,
@@ -777,7 +783,7 @@ export function PricingPanel({ rows, onChanged }: { rows: PricingPlan[]; onChang
   return (
     <Panel
       title="Pricing"
-      desc="Packages shown in the pricing section. One plan can be highlighted as featured."
+      desc="Manage Design and Video Editing packages. Each group can have one highlighted plan."
       actions={
         <div className="flex gap-2">
           <Btn variant="ghost" onClick={saveAll} disabled={saving}>
@@ -807,6 +813,12 @@ export function PricingPanel({ rows, onChanged }: { rows: PricingPlan[]; onChang
             }
           >
             <Group cols={3}>
+              <Select
+                label="Pricing section"
+                value={pl.category}
+                onChange={(v) => patch(pl.id, { category: v })}
+                options={PRICING_CATEGORIES}
+              />
               <Text label="Plan name" value={pl.name} onChange={(v) => patch(pl.id, { name: v })} />
               <Text label="Price" value={pl.price} onChange={(v) => patch(pl.id, { price: v })} hint="e.g. $249 or Custom" />
               <Text label="Period" value={pl.period} onChange={(v) => patch(pl.id, { period: v })} hint="e.g. / video" />

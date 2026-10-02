@@ -266,6 +266,37 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
   );
 }
 
+function PricingGroup({
+  eyebrow,
+  title,
+  description,
+  plans,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  plans: PricingPlan[];
+}) {
+  if (plans.length === 0) return null;
+
+  return (
+    <div className="relative">
+      <div className="mb-9 flex flex-col gap-4 border-b border-border/70 pb-7 md:flex-row md:items-end md:justify-between">
+        <div>
+          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-primary-glow">{eyebrow}</div>
+          <h3 className="text-3xl font-bold text-chrome md:text-5xl">{title}</h3>
+        </div>
+        <p className="max-w-md text-sm leading-relaxed text-muted-foreground md:text-right">{description}</p>
+      </div>
+      <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {plans.map((plan) => (
+          <PricingCard key={plan.id} plan={plan} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name required").max(120),
   email: z.string().trim().email("Invalid email").max(255),
@@ -517,7 +548,7 @@ function Index() {
 
       {/* PRICING */}
       <section id="pricing" className="relative py-32 px-6 md:px-10 scroll-mt-24">
-        <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-7xl">
           <div className="mb-16 text-center">
             <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 04 — Pricing</div>
             <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
@@ -527,10 +558,19 @@ function Index() {
               <p className="mt-6 max-w-2xl mx-auto text-muted-foreground">{settings.pricing_subtitle}</p>
             )}
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
-            {pricingPlans.map((plan) => (
-              <PricingCard key={plan.id} plan={plan} />
-            ))}
+          <div className="space-y-24">
+            <PricingGroup
+              eyebrow="01 / Brand & Visual"
+              title="Design Pricing"
+              description="Identity systems and campaign visuals shaped around your brand, delivered ready for digital and print."
+              plans={pricingPlans.filter((plan) => plan.category === "design")}
+            />
+            <PricingGroup
+              eyebrow="02 / Motion & Film"
+              title="Video Editing Pricing"
+              description="Cinematic editing packages for social content, campaigns, music videos, and commercial productions."
+              plans={pricingPlans.filter((plan) => plan.category === "video_editing")}
+            />
           </div>
         </div>
       </section>

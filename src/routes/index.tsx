@@ -297,6 +297,35 @@ function PricingGroup({
   );
 }
 
+function PriceList({ eyebrow, title, plans }: { eyebrow: string; title: string; plans: PricingPlan[] }) {
+  if (plans.length === 0) return null;
+  return (
+    <div className="rounded-3xl p-[1.5px] bg-border/40">
+      <div className="h-full rounded-3xl glass-strong p-6 md:p-8">
+        <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-primary-glow">{eyebrow}</div>
+        <h3 className="mb-6 text-2xl md:text-3xl font-bold text-chrome">{title}</h3>
+        <ul className="divide-y divide-border/50">
+          {plans.map((plan) => (
+            <li key={plan.id}>
+              <button
+                onClick={() => scrollToId("contact")}
+                data-cursor-label={plan.cta_label || "Quote"}
+                className="group w-full flex items-baseline justify-between gap-4 py-4 text-left transition-colors hover:text-primary-glow"
+              >
+                <span className="text-sm md:text-base text-foreground/90 group-hover:text-foreground">{plan.name}</span>
+                <span className="shrink-0 font-semibold tabular-nums text-chrome">
+                  {plan.price}
+                  {plan.period && <span className="ml-1 text-xs text-muted-foreground">{plan.period}</span>}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name required").max(120),
   email: z.string().trim().email("Invalid email").max(255),
@@ -559,18 +588,35 @@ function Index() {
             )}
           </div>
           <div className="space-y-24">
-            <PricingGroup
-              eyebrow="01 / Brand & Visual"
-              title="Design Pricing"
-              description="Identity systems and campaign visuals shaped around your brand, delivered ready for digital and print."
-              plans={pricingPlans.filter((plan) => plan.category === "design")}
-            />
-            <PricingGroup
-              eyebrow="02 / Motion & Film"
-              title="Video Editing Pricing"
-              description="Cinematic editing packages for social content, campaigns, music videos, and commercial productions."
-              plans={pricingPlans.filter((plan) => plan.category === "video_editing")}
-            />
+            <div>
+              <div className="grid gap-6 lg:grid-cols-2">
+                <PriceList
+                  eyebrow="01 / Brand & Visual"
+                  title="Graphic Design"
+                  plans={pricingPlans.filter((plan) => plan.category === "design")}
+                />
+                <PriceList
+                  eyebrow="02 / Motion & Film"
+                  title="Video Editing & Motion Design"
+                  plans={pricingPlans.filter((plan) => plan.category === "video_editing")}
+                />
+              </div>
+              <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+                Final pricing depends on project complexity, duration, and deliverables.
+              </p>
+            </div>
+            <div>
+              <PricingGroup
+                eyebrow="03 / Monthly"
+                title="Monthly Creative Packages"
+                description="Consistent, premium content every month for brands that want to keep showing up."
+                plans={pricingPlans.filter((plan) => plan.category === "monthly")}
+              />
+              <p className="mt-8 max-w-3xl mx-auto text-center text-xs leading-relaxed text-muted-foreground">
+                Packages cover the listed creative deliverables. Filming, advertising spend, community management, and
+                additional revisions are quoted separately. Custom packages are available upon request.
+              </p>
+            </div>
           </div>
         </div>
       </section>

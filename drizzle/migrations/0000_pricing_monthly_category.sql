@@ -1,0 +1,2 @@
+ALTER TABLE public.pricing_plans DROP CONSTRAINT IF EXISTS pricing_plans_category_check;
+ALTER TABLE public.pricing_plans ADD CONSTRAINT pricing_plans_category_check CHECK (category IN ('design','video_editing','monthly'));

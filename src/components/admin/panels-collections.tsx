@@ -27,6 +27,7 @@ const STATUSES = ["draft", "published", "unpublished"];
 const PRICING_CATEGORIES = [
   { value: "design", label: "Design Pricing" },
   { value: "video_editing", label: "Video Editing Pricing" },
+  { value: "monthly", label: "Monthly Packages" },
 ];
 
 function Row({

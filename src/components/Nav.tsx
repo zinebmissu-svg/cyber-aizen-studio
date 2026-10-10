@@ -135,7 +135,7 @@ export function Nav() {
               }`}
             >
               {l.label}
-              <span className="font-mono text-[10px] text-primary-glow">↗</span>
+              <span className="font-mono text-[11px] text-primary-glow">↗</span>
             </a>
           ))}
           <a

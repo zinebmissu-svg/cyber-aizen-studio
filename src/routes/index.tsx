@@ -200,7 +200,7 @@ function TiltCard({ s }: { s: ServiceItem }) {
       <h3 className="relative text-3xl md:text-4xl font-bold text-chrome mb-4">{s.t}</h3>
       <p className="relative text-muted-foreground leading-relaxed">{s.d}</p>
 
-      <div className="relative mt-8 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/70">
+      <div className="relative mt-8 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-foreground/70">
         <span className="w-8 h-px bg-primary-glow transition-all duration-500 group-hover:w-16" />
         <span>Inquire</span>
       </div>
@@ -225,9 +225,9 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
         )}
 
         <div className="relative flex items-center justify-between mb-6">
-          <span className={`font-mono text-[10px] uppercase tracking-[0.3em] ${featured ? "text-foreground/80" : "text-primary-glow"}`}>{plan.name}</span>
+          <span className={`font-mono text-[11px] uppercase tracking-[0.3em] ${featured ? "text-foreground/80" : "text-primary-glow"}`}>{plan.name}</span>
           {plan.badge && (
-            <span className={`font-mono text-[9px] uppercase tracking-[0.25em] px-3 py-1 rounded-full ${featured ? "bg-background/15 border border-foreground/30 text-foreground" : "bg-primary/20 border border-primary-glow/40 text-violet-glow"}`}>
+            <span className={`font-mono text-[11px] uppercase tracking-[0.25em] px-3 py-1 rounded-full ${featured ? "bg-background/15 border border-foreground/30 text-foreground" : "bg-primary/20 border border-primary-glow/40 text-violet-glow"}`}>
               {plan.badge}
             </span>
           )}
@@ -235,7 +235,7 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
 
         <div className="relative flex items-baseline gap-2">
           <span className={`text-4xl md:text-5xl font-bold ${featured ? "text-foreground" : "text-chrome"}`}>{plan.price}</span>
-          {plan.period && <span className={`font-mono text-[10px] uppercase tracking-[0.25em] ${featured ? "text-foreground/70" : "text-muted-foreground"}`}>{plan.period}</span>}
+          {plan.period && <span className={`font-mono text-[11px] uppercase tracking-[0.25em] ${featured ? "text-foreground/70" : "text-muted-foreground"}`}>{plan.period}</span>}
         </div>
 
         {plan.description && <p className={`relative mt-4 text-sm leading-relaxed ${featured ? "text-foreground/80" : "text-muted-foreground"}`}>{plan.description}</p>}
@@ -252,7 +252,7 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
         <div className="relative mt-8 pt-6 border-t border-border/50">
           <button
             onClick={() => scrollToId("contact")}
-            className={`w-full py-3 rounded-full font-mono text-[10px] uppercase tracking-[0.25em] transition-colors ${
+            className={`w-full py-3 rounded-full font-mono text-[11px] uppercase tracking-[0.25em] transition-colors ${
               featured
                 ? "bg-foreground text-background hover:bg-primary hover:text-primary-foreground"
                 : "border border-border text-muted-foreground hover:text-foreground hover:border-primary-glow/50"
@@ -283,7 +283,7 @@ function PricingGroup({
     <div className="relative">
       <div className="mb-9 flex flex-col gap-4 border-b border-border/70 pb-7 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-primary-glow">{eyebrow}</div>
+          <div className="mb-3 font-mono text-[11px] uppercase tracking-[0.3em] text-primary-glow">{eyebrow}</div>
           <h3 className="text-3xl font-bold text-chrome md:text-5xl">{title}</h3>
         </div>
         <p className="max-w-md text-sm leading-relaxed text-muted-foreground md:text-right">{description}</p>
@@ -302,7 +302,7 @@ function PriceList({ eyebrow, title, plans }: { eyebrow: string; title: string; 
   return (
     <div className="rounded-3xl p-[1.5px] bg-border/40">
       <div className="h-full rounded-3xl glass-strong p-6 md:p-8">
-        <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-primary-glow">{eyebrow}</div>
+        <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.3em] text-primary-glow">{eyebrow}</div>
         <h3 className="mb-6 text-2xl md:text-3xl font-bold text-chrome">{title}</h3>
         <ul className="divide-y divide-border/50">
           {plans.map((plan) => (
@@ -385,7 +385,7 @@ function Index() {
         <div className="relative z-10 text-center px-6 max-w-6xl">
           <div className="mb-8 inline-flex items-center gap-3 px-4 py-2 rounded-full glass">
             <span className="w-2 h-2 rounded-full bg-primary-glow animate-pulse-glow" />
-            <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-muted-foreground">
+            <span className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground">
               {settings?.hero_eyebrow ?? "Cinematic Portfolio · 2026"}
             </span>
           </div>
@@ -412,7 +412,7 @@ function Index() {
 
         <button
           onClick={() => scrollToId("about")}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground flex items-center gap-3"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground flex items-center gap-3"
         >
           <span>Scroll</span>
           <span className="w-12 h-px bg-gradient-to-r from-primary-glow to-transparent" />
@@ -474,7 +474,7 @@ function Index() {
                 ].map((s, i) => (
                   <div key={i}>
                     <div className="text-3xl font-bold text-violet-glow">{s.n}</div>
-                    <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mt-1">{s.l}</div>
+                    <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground mt-1">{s.l}</div>
                   </div>
                 ))}
               </div>
@@ -504,7 +504,7 @@ function Index() {
                 key={f}
                 onClick={() => setFilter(f)}
                 data-cursor-label="Filter"
-                className={`px-5 py-2 rounded-full font-mono text-[10px] uppercase tracking-[0.3em] border transition-all ${
+                className={`px-5 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.3em] border transition-all ${
                   filter === f
                     ? "bg-foreground text-background border-foreground shadow-[var(--shadow-glow)]"
                     : "border-border text-muted-foreground hover:text-foreground hover:border-primary-glow/50"
@@ -531,11 +531,11 @@ function Index() {
                   />
                   <div className="absolute inset-0 p-7 flex flex-col justify-between">
                     <div className="flex items-start justify-between">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.3em] px-2.5 py-1 rounded-full glass">{p.kind}</span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">{p.year}</span>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.3em] px-2.5 py-1 rounded-full glass">{p.kind}</span>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">{p.year}</span>
                     </div>
                     <div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2">{p.client}</div>
+                      <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-2">{p.client}</div>
                       <h3 className="text-2xl md:text-3xl font-bold text-chrome leading-tight">{p.title}</h3>
                       <div className="mt-4 h-px w-0 bg-primary-glow transition-all duration-500 group-hover:w-full" />
                     </div>
@@ -601,7 +601,7 @@ function Index() {
                   plans={pricingPlans.filter((plan) => plan.category === "video_editing")}
                 />
               </div>
-              <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+              <p className="mt-6 text-center font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
                 Final pricing depends on project complexity, duration, and deliverables.
               </p>
             </div>
@@ -649,7 +649,7 @@ function Index() {
                   <Mail className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Email</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Email</div>
                   <div className="text-xl font-bold text-chrome">{email}</div>
                 </div>
               </a>
@@ -659,7 +659,7 @@ function Index() {
                   <Instagram className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Instagram</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Instagram</div>
                   <div className="text-xl font-bold text-chrome">@{ig.replace(/^@/, "")}</div>
                 </div>
               </a>
@@ -669,7 +669,7 @@ function Index() {
                   <MessageCircle className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">WhatsApp</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">WhatsApp</div>
                   <div className="text-xl font-bold text-chrome">{whatsapp}</div>
                 </div>
               </a>
@@ -679,7 +679,7 @@ function Index() {
                   <MapPin className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Based in</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Based in</div>
                   <div className="text-xl font-bold text-chrome">{settings?.location_text ?? "Casablanca, Morocco"}</div>
                 </div>
               </div>
@@ -689,7 +689,7 @@ function Index() {
             <form onSubmit={handleSubmit} className="glass-strong rounded-3xl p-8 md:p-10 space-y-6">
               <div className="grid gap-6 sm:grid-cols-2">
                 <label className="block group">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Name</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Name</div>
                   <input
                     type="text"
                     value={form.name}
@@ -699,7 +699,7 @@ function Index() {
                   />
                 </label>
                 <label className="block group">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Email</div>
+                  <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Email</div>
                   <input
                     type="email"
                     value={form.email}
@@ -711,7 +711,7 @@ function Index() {
               </div>
 
               <label className="block group">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Project type</div>
+                <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Project type</div>
                 <input
                   type="text"
                   value={projectType}
@@ -722,7 +722,7 @@ function Index() {
               </label>
 
               <label className="block group">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Tell me about it</div>
+                <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-2 group-focus-within:text-primary-glow transition-colors">Tell me about it</div>
                 <textarea
                   rows={6}
                   value={form.message}
@@ -738,7 +738,7 @@ function Index() {
               )}
 
               <div className="flex items-center justify-between gap-6 pt-2">
-                <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Replies within 48h</div>
+                <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Replies within 48h</div>
                 <button
                   type="submit"
                   disabled={status === "sending"}

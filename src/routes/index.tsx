@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState, type FormEvent, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { ClientOnly } from "../components/ClientOnly";
 import { HeroScene } from "../components/HeroScene";
 import { MagneticButton } from "../components/MagneticButton";
@@ -251,7 +251,7 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
 
         <div className="relative mt-8 pt-6 border-t border-border/50">
           <button
-            onClick={() => scrollToId("contact")}
+            onClick={() => { window.dispatchEvent(new CustomEvent("aizen:package", { detail: `${plan.name} — ${plan.price}` })); scrollToId("contact"); }}
             className={`w-full py-3 rounded-full font-mono text-[11px] uppercase tracking-[0.25em] transition-colors ${
               featured
                 ? "bg-foreground text-background hover:bg-primary hover:text-primary-foreground"
@@ -308,7 +308,7 @@ function PriceList({ eyebrow, title, plans }: { eyebrow: string; title: string; 
           {plans.map((plan) => (
             <li key={plan.id}>
               <button
-                onClick={() => scrollToId("contact")}
+                onClick={() => { window.dispatchEvent(new CustomEvent("aizen:package", { detail: `${plan.name} — ${plan.price}` })); scrollToId("contact"); }}
                 data-cursor-label={plan.cta_label || "Quote"}
                 className="group w-full flex items-baseline justify-between gap-4 py-4 text-left transition-colors hover:text-primary-glow"
               >
@@ -340,6 +340,11 @@ function Index() {
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [projectType, setProjectType] = useState("");
+  useEffect(() => {
+    const onPkg = (e: Event) => setProjectType(String((e as CustomEvent).detail ?? ""));
+    window.addEventListener("aizen:package", onPkg);
+    return () => window.removeEventListener("aizen:package", onPkg);
+  }, []);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 

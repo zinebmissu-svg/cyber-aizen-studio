@@ -119,7 +119,7 @@ export function Nav() {
 
       <div
         id="mobile-menu"
-        className={`md:hidden mx-auto max-w-7xl mt-2 overflow-hidden rounded-3xl glass-strong transition-all duration-500 ${
+        className={`md:hidden mx-auto max-w-7xl mt-2 overflow-hidden rounded-3xl glass-strong bg-background/95 backdrop-blur-2xl transition-all duration-500 ${
           open ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0 pointer-events-none border-transparent"
         }`}
       >

@@ -3,28 +3,48 @@ import { useEffect, useState } from "react";
 export function LoadingScreen() {
   const [pct, setPct] = useState(0);
   const [done, setDone] = useState(false);
+  const [gone, setGone] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (sessionStorage.getItem("aizen-loaded")) {
       setDone(true);
+      setGone(true);
       return;
     }
     let v = 0;
+    let fadeTimer: ReturnType<typeof setTimeout> | undefined;
     const id = setInterval(() => {
       v += Math.random() * 9 + 3;
       if (v >= 100) {
         v = 100;
         clearInterval(id);
-        setTimeout(() => {
+        fadeTimer = setTimeout(() => {
           sessionStorage.setItem("aizen-loaded", "1");
           setDone(true);
-        }, 500);
+        }, 400);
       }
       setPct(Math.floor(v));
-    }, 90);
-    return () => clearInterval(id);
+    }, 80);
+    // Safety net: never block the page longer than ~4s no matter what.
+    const hardTimer = setTimeout(() => {
+      sessionStorage.setItem("aizen-loaded", "1");
+      setDone(true);
+    }, 4000);
+    return () => {
+      clearInterval(id);
+      clearTimeout(hardTimer);
+      if (fadeTimer) clearTimeout(fadeTimer);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!done) return;
+    const t = setTimeout(() => setGone(true), 1100);
+    return () => clearTimeout(t);
+  }, [done]);
+
+  if (gone) return null;
 
   return (
     <div

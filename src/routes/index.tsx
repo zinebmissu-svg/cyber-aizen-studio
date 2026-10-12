@@ -566,19 +566,7 @@ function Index() {
       <VideoWork projects={projects} projectMedia={projectMedia} />
 
       {/* SERVICES */}
-      <section id="services" className="relative py-32 px-6 md:px-10 scroll-mt-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-16">
-            <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 03 — Services</div>
-            <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-              <LastWordGradient text={settings?.services_headline ?? "What I make"} />
-            </h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {(settings?.services_json ?? []).map((s: ServiceItem) => <TiltCard key={s.n} s={s} />)}
-          </div>
-        </div>
-      </section>
+      <ServicesShowcase headline={settings?.services_headline ?? "What I make"} />
 
       {/* PRICING */}
       <section id="pricing" className="relative py-32 px-6 md:px-10 scroll-mt-24">

@@ -434,6 +434,42 @@ export type Database = {
         }
         Relationships: []
       }
+      showcase_items: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          sort_order: number
+          storage_path: string | null
+          title: string
+          updated_at: string
+          url: string
+          visible: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind?: string
+          sort_order?: number
+          storage_path?: string | null
+          title?: string
+          updated_at?: string
+          url: string
+          visible?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          sort_order?: number
+          storage_path?: string | null
+          title?: string
+          updated_at?: string
+          url?: string
+          visible?: boolean
+        }
+        Relationships: []
+      }
       site_drafts: {
         Row: {
           created_at: string

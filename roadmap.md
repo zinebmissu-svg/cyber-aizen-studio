@@ -1,6 +1,6 @@
 # Website upgrade roadmap (from upgrade brief)
 
-- [ ] Correct gallery placement: replace existing Work with posters/reels, restore Services and its editor, and verify no extra section.
+- [x] Correct gallery placement: replace existing Work with posters/reels, restore Services and its editor, and verify no extra section.
 
 - [x] P1: Navigation — active section, mobile menu, Let's Talk CTA, keyboard/focus
 - [x] P1: Hero, typography & spacing refinement

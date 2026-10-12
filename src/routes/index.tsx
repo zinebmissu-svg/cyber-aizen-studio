@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ServicesShowcase } from "@/components/ServicesShowcase";
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { ClientOnly } from "../components/ClientOnly";
 import { HeroScene } from "../components/HeroScene";
@@ -566,7 +567,7 @@ function Index() {
       <VideoWork projects={projects} projectMedia={projectMedia} />
 
       {/* SERVICES */}
-      <ServicesShowcase headline={settings?.services_headline ?? "What I make"} />
+      <ServicesShowcase headline={<LastWordGradient text={settings?.services_headline ?? "What I make"} />} />
 
       {/* PRICING */}
       <section id="pricing" className="relative py-32 px-6 md:px-10 scroll-mt-24">

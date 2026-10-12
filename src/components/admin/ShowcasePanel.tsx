@@ -1,7 +1,7 @@
 import { useEffect, useState, type ChangeEvent } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { BUCKET, Panel, Btn, Empty } from "@/components/admin/kit";
+import { BUCKET, Panel, Empty } from "@/components/admin/kit";
 import type { ShowcaseItem } from "@/components/ServicesShowcase";
 
 export function ShowcasePanel() {
@@ -123,7 +123,6 @@ export function ShowcasePanel() {
       <div className="space-y-10">
         {section("poster", "Posters", "image/jpeg,image/png,image/webp")}
         {section("video", "Reels & edited videos", "video/mp4,video/webm,video/quicktime")}
-        <div className="hidden"><Btn>.</Btn></div>
       </div>
     </Panel>
   );

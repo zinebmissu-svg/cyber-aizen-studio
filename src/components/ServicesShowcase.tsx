@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 
 export type ShowcaseItem = Database["public"]["Tables"]["showcase_items"]["Row"];
 
-export function ServicesShowcase({ headline }: { headline: string }) {
+export function ServicesShowcase({ headline }: { headline: ReactNode }) {
   const [items, setItems] = useState<ShowcaseItem[]>([]);
   const [tab, setTab] = useState<"poster" | "video">("poster");
   const [open, setOpen] = useState<ShowcaseItem | null>(null);

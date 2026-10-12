@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { ShowcasePanel } from "@/components/admin/ShowcasePanel";
 import { useSiteData } from "@/hooks/use-site-data";
 import { Skeleton } from "@/components/admin/kit";
 import {
@@ -225,7 +226,7 @@ function Dashboard({ email }: { email: string }) {
       case "portfolio":
         return <PortfolioPanel rows={projects} media={projectMedia} onChanged={refresh} />;
       case "services":
-        return <ServicesPanel rows={services} onChanged={refresh} />;
+        return <ShowcasePanel />;
       case "pricing":
         return <PricingPanel rows={pricingPlans} onChanged={refresh} />;
       case "testimonials":

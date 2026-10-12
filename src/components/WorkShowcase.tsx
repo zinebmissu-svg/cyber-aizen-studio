@@ -1,10 +1,11 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 import type { Database } from "@/integrations/supabase/types";
 
 export type ShowcaseItem = Database["public"]["Tables"]["showcase_items"]["Row"];
 
-export function ServicesShowcase({ headline }: { headline: ReactNode }) {
+export function WorkShowcase({ headline, subtitle }: { headline: ReactNode; subtitle?: string }) {
   const [items, setItems] = useState<ShowcaseItem[]>([]);
   const [tab, setTab] = useState<"poster" | "video">("poster");
   const [open, setOpen] = useState<ShowcaseItem | null>(null);
@@ -21,16 +22,17 @@ export function ServicesShowcase({ headline }: { headline: ReactNode }) {
   const list = items.filter((i) => i.kind === tab);
 
   return (
-    <section id="services" className="relative py-32 px-6 md:px-10 scroll-mt-24">
+    <section id="work" className="relative py-32 px-6 md:px-10 scroll-mt-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 03 — Services</div>
+            <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 02 — Portfolio</div>
             <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">{headline}</h2>
+            {subtitle && <p className="mt-6 max-w-2xl text-muted-foreground">{subtitle}</p>}
           </div>
           <div className="inline-flex p-1 rounded-full glass-strong">
             {(["poster", "video"] as const).map((k) => (
-              <button
+              <Button variant="ghost"
                 key={k}
                 onClick={() => setTab(k)}
                 className={`px-5 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.25em] transition-colors ${
@@ -38,7 +40,7 @@ export function ServicesShowcase({ headline }: { headline: ReactNode }) {
                 }`}
               >
                 {k === "poster" ? "Posters" : "Reels"}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -48,9 +50,9 @@ export function ServicesShowcase({ headline }: { headline: ReactNode }) {
         ) : tab === "poster" ? (
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 [&>*]:mb-6">
             {list.map((i) => (
-              <button key={i.id} onClick={() => setOpen(i)} className="block w-full overflow-hidden rounded-3xl border border-border group">
+              <Button variant="ghost" key={i.id} onClick={() => setOpen(i)} className="block h-auto p-0 w-full overflow-hidden rounded-3xl border border-border group">
                 <img src={i.url} alt={i.title || "Poster"} loading="lazy" className="w-full h-auto transition-transform duration-700 group-hover:scale-105" />
-              </button>
+              </Button>
             ))}
           </div>
         ) : (

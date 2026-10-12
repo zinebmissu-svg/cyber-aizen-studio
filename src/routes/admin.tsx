@@ -15,7 +15,6 @@ import {
   SettingsPanel,
 } from "@/components/admin/panels-site";
 import {
-  PortfolioPanel,
   ServicesPanel,
   TestimonialsPanel,
   TimelinePanel,
@@ -180,7 +179,7 @@ const NAV: { group: string; items: { key: string; label: string }[] }[] = [
   {
     group: "Content",
     items: [
-      { key: "portfolio", label: "Portfolio" },
+      { key: "portfolio", label: "Work" },
       { key: "services", label: "Services" },
       { key: "pricing", label: "Pricing" },
       { key: "testimonials", label: "Testimonials" },
@@ -224,9 +223,9 @@ function Dashboard({ email }: { email: string }) {
       case "timeline":
         return <TimelinePanel rows={timeline} onChanged={refresh} />;
       case "portfolio":
-        return <PortfolioPanel rows={projects} media={projectMedia} onChanged={refresh} />;
-      case "services":
         return <ShowcasePanel />;
+      case "services":
+        return <ServicesPanel rows={services} onChanged={refresh} />;
       case "pricing":
         return <PricingPanel rows={pricingPlans} onChanged={refresh} />;
       case "testimonials":

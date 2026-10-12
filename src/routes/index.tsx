@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ServicesShowcase } from "@/components/ServicesShowcase";
+import { WorkShowcase } from "@/components/WorkShowcase";
 import { useEffect, useRef, useState, type FormEvent, type MouseEvent } from "react";
 import { ClientOnly } from "../components/ClientOnly";
 import { HeroScene } from "../components/HeroScene";
@@ -7,9 +7,8 @@ import { MagneticButton } from "../components/MagneticButton";
 import { Portrait3D } from "../components/Portrait3D";
 import { ReviewsMarquee } from "../components/ReviewsMarquee";
 import { scrollToId } from "../components/SmoothScroll";
-import { useSiteData, type Project, type PricingPlan } from "../hooks/use-site-data";
+import { useSiteData, type PricingPlan } from "../hooks/use-site-data";
 import Timeline from "../components/Timeline";
-import VideoWork from "../components/VideoWork";
 import GridBackground from "@/components/GridBackground";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
@@ -150,8 +149,6 @@ function Visualizer() {
     </div>
   );
 }
-
-const FILTERS = ["All", "VFX", "Editing", "3D Motion", "Direction"] as const;
 
 type ServiceItem = { n: string; t: string; d: string; icon: string };
 
@@ -335,9 +332,7 @@ const contactSchema = z.object({
 
 /* ============================================================ */
 function Index() {
-  const { settings, projects, projectMedia, reviews, pricingPlans } = useSiteData();
-  const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
-  const items: Project[] = projects.filter((p) => filter === "All" || p.kind === filter);
+  const { settings, services, reviews, pricingPlans } = useSiteData();
 
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [projectType, setProjectType] = useState("");
@@ -492,82 +487,27 @@ function Index() {
       <Timeline />
 
       {/* WORK */}
-      <section id="work" className="relative py-32 px-6 md:px-10 scroll-mt-24">
+      <WorkShowcase
+        headline={<LastWordGradient text={settings?.work_headline ?? "Selected work"} />}
+        subtitle={settings?.work_subtitle}
+      />
+
+      {/* SERVICES */}
+      <section id="services" className="relative py-32 px-6 md:px-10 scroll-mt-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16">
-            <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 02 — Portfolio</div>
+            <div className="font-mono text-xs uppercase tracking-[0.3em] text-primary-glow mb-4">/ 03 — Services</div>
             <h2 className="text-5xl md:text-7xl font-bold text-chrome leading-[0.95]">
-              <LastWordGradient text={settings?.work_headline ?? "Selected work"} />
+              <LastWordGradient text={settings?.services_headline ?? "What I make"} />
             </h2>
-            <p className="mt-6 max-w-2xl text-muted-foreground">
-              {settings?.work_subtitle}
-            </p>
           </div>
-
-          <div className="flex flex-wrap gap-2 mb-12">
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                data-cursor-label="Filter"
-                className={`px-5 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.3em] border transition-all ${
-                  filter === f
-                    ? "bg-foreground text-background border-foreground shadow-[var(--shadow-glow)]"
-                    : "border-border text-muted-foreground hover:text-foreground hover:border-primary-glow/50"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {items.map((p) => {
-              const inner = (
-                <>
-                  {p.cover_url ? (
-                    <img src={p.cover_url} alt={p.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  ) : (
-                    <div className={`absolute inset-0 bg-gradient-to-br ${p.gradient} transition-transform duration-700 group-hover:scale-110`} />
-                  )}
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,oklch(0_0_0/70%)_100%)]" />
-                  <div
-                    className="absolute inset-0 mix-blend-overlay opacity-25 transition-opacity group-hover:opacity-40"
-                    style={{ background: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")" }}
-                  />
-                  <div className="absolute inset-0 p-7 flex flex-col justify-between">
-                    <div className="flex items-start justify-between">
-                      <span className="font-mono text-[11px] uppercase tracking-[0.3em] px-2.5 py-1 rounded-full glass">{p.kind}</span>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground">{p.year}</span>
-                    </div>
-                    <div>
-                      <div className="font-mono text-[11px] uppercase tracking-[0.3em] text-muted-foreground mb-2">{p.client}</div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-chrome leading-tight">{p.title}</h3>
-                      <div className="mt-4 h-px w-0 bg-primary-glow transition-all duration-500 group-hover:w-full" />
-                    </div>
-                  </div>
-                  <div className="absolute top-5 right-5 w-9 h-9 rounded-full glass flex items-center justify-center text-primary-glow opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all">↗</div>
-                </>
-              );
-              return p.link_url ? (
-                <a key={p.id} href={p.link_url} target="_blank" rel="noopener noreferrer" data-cursor-label="Open" className="group relative aspect-[4/5] rounded-2xl overflow-hidden glass-strong cursor-none block">
-                  {inner}
-                </a>
-              ) : (
-                <article key={p.id} data-cursor-label="Open" className="group relative aspect-[4/5] rounded-2xl overflow-hidden glass-strong cursor-none">
-                  {inner}
-                </article>
-              );
-            })}
+            {services.map((service) => (
+              <TiltCard key={service.id} s={{ n: service.number, t: service.title, d: service.description, icon: service.icon }} />
+            ))}
           </div>
         </div>
       </section>
-
-      {/* VIDEO WORK */}
-      <VideoWork projects={projects} projectMedia={projectMedia} />
-
-      {/* SERVICES */}
-      <ServicesShowcase headline={<LastWordGradient text={settings?.services_headline ?? "What I make"} />} />
 
       {/* PRICING */}
       <section id="pricing" className="relative py-32 px-6 md:px-10 scroll-mt-24">

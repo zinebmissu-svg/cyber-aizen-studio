@@ -2,7 +2,7 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { BUCKET, Panel, Empty } from "@/components/admin/kit";
-import type { ShowcaseItem } from "@/components/ServicesShowcase";
+import type { ShowcaseItem } from "@/components/WorkShowcase";
 
 export function ShowcasePanel() {
   const [items, setItems] = useState<ShowcaseItem[]>([]);
@@ -119,7 +119,7 @@ export function ShowcasePanel() {
   };
 
   return (
-    <Panel title="Services showcase" desc="Upload posters (JPG/PNG) and edited reels/videos shown in the Services section.">
+    <Panel title="Work" desc="Upload posters (JPG/PNG) and edited reels/videos shown in the Work section.">
       <div className="space-y-10">
         {section("poster", "Posters", "image/jpeg,image/png,image/webp")}
         {section("video", "Reels & edited videos", "video/mp4,video/webm,video/quicktime")}

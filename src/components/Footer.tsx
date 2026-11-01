@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useSiteData } from "@/hooks/use-site-data";
 
 export function Footer() {
@@ -17,6 +18,17 @@ export function Footer() {
         </div>
         <div className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground md:text-right">
           {settings?.footer_text ?? `© ${new Date().getFullYear()} Aizen Studio`}
+        </div>
+      </div>
+      <div className="border-t border-border/30">
+        <div className="mx-auto max-w-7xl px-6 md:px-10 py-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8">
+          <Link to="/privacy" className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground transition-colors">
+            Privacy Policy
+          </Link>
+          <span className="hidden sm:block w-1 h-1 rounded-full bg-muted-foreground/40" aria-hidden />
+          <Link to="/terms" className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground hover:text-foreground transition-colors">
+            Terms of Service
+          </Link>
         </div>
       </div>
     </footer>
